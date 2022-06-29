@@ -1,54 +1,53 @@
 NAME := minishell
 
-LIBFT_DIR := lib/libft
-LIBFT := $(LIBFT_DIR)/libft.a
+OBJDIR := objdir
+LIBFTDIR := lib/libft
+LIBFT := $(LIBFTDIR)/libft.a
 
-INCLUDE := -I include -I $(LIBFT_DIR)
-LDLIBS += -lreadline -lft
-LDFLAGS += -L$(LIBFT_DIR)
 CFLAGS += -Wall -Wextra -Werror
+LDLIBS += -lreadline -lft
+LDFLAGS += -L$(LIBFTDIR)
+INCLUDE = -Iinclude -I$(LIBFTDIR)
 DEBUG = -g3
 CC := gcc -g3
 
-vpath %.c	src \
-			src/main \
-			src/save_env_var \
-			src/shell \
-			src/pipes
+vpath %.c src \
+	src/main \
+	src/save_env_var \
+	src/shell \
+	src/pipes
 
-SRC	=	main.c \
-		save_local_env.c \
-		prompt.c \
-		redirect.c \
-		redirect_in.c \
-		str_helpers.c
+OBJS = $(addprefix $(OBJDIR)/, $(SRC:.c=.o))
+SRC	= main.c \
+	  save_local_env.c \
+	  prompt.c \
+	  redirect.c \
+	  redirect_in.c \
+	  str_helpers.c
 
-OBJ_DIR := obj
-OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
+$(OBJDIR)/%.o: %.c
+	$(CC) $(INCLUDE) -c $< -o $@
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(LIBFT)
-	$(CC) $(OBJ) -o $@ $(LDLIBS) $(LDFLAGS)
+$(NAME): $(OBJS) $(LIBFT)
+	$(CC) $(OBJS) -o $@ $(LDLIBS) $(LDFLAGS)
 
 $(LIBFT):
-	@make -C $(LIBFT_DIR) --no-print-directory
+	@$(MAKE) -C $(LIBFTDIR) --no-print-directory
 
-$(OBJ_DIR)/%.o: %.c
-	$(CC) $(INCLUDE) -c $< -o $@
+$(OBJS): | $(OBJDIR)
 
-$(OBJ): | $(OBJ_DIR)
-
-$(OBJ_DIR):
+$(OBJDIR):
 	mkdir $@
 
 clean:
-	$(RM) $(OBJ)
-	@make clean -C $(LIBFT_DIR) --no-print-directory
+	@$(MAKE) clean -C $(LIBFTDIR) --no-print-directory
+	$(RM) $(OBJS)
 
 fclean: clean
+	@$(MAKE) fclean -C $(LIBFTDIR) --no-print-directory
 	$(RM) $(NAME)
-	@make fclean -C $(LIBFT_DIR) --no-print-directory
 
 re: fclean all
 
