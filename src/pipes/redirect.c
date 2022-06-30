@@ -84,8 +84,8 @@ char *ft_file_name (char *prompt_line, char redirect)
 {
 	char *file_name;
 	int	i;
-	i = 0;
 
+	i = 0;
 	while (prompt_line[i] == redirect)
 		i++;
 	while (prompt_line[i] == ' ')
@@ -101,8 +101,6 @@ char *ft_file_name (char *prompt_line, char redirect)
 	else
 		file_name = ft_get_file_name (&prompt_line[i], 0);
 	return (file_name);
-
-
 }
 
 static int ft_check_quotes (char *prompt_line)
@@ -131,8 +129,8 @@ static char* ft_check_redirect_type (char *str, char *prompt_line, char redirect
 {
 	if (redirect == '>')
 		str = ft_out_redirect (str, prompt_line);
-	 else
-	 	str = ft_in_redirect (str, prompt_line);
+	else
+		str = ft_in_redirect (str, prompt_line);
 	return (str) ;
 
 }
@@ -140,8 +138,8 @@ static char* ft_check_redirect_type (char *str, char *prompt_line, char redirect
 char *ft_redirect (char *prompt_line)
 {
 	int i;
-	i = -1;
 
+	i = -1;
 	if (ft_check_quotes (prompt_line))
 		return (prompt_line);
 	while (prompt_line[++i])
