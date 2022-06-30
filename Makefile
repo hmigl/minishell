@@ -13,6 +13,7 @@ CC := gcc -g3
 
 vpath %.c src \
 	src/main \
+	src/builtins \
 	src/save_env_var \
 	src/shell \
 	src/pipes
@@ -23,7 +24,11 @@ SRC	= main.c \
 	  prompt.c \
 	  redirect.c \
 	  redirect_in.c \
-	  str_helpers.c
+	  redirect_out.c \
+	  str_helpers.c \
+	  echo.c pwd.c env.c \
+	  is_builtin.c exec_builtin.c
+
 
 $(OBJDIR)/%.o: %.c
 	$(CC) $(INCLUDE) -c $< -o $@

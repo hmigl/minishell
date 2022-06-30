@@ -1,5 +1,28 @@
 #include "minishell.h"
 
+static void ft_alloc_cmd (char* str)
+{
+	int i;
+	int alloc_cmd;
+
+	alloc_cmd = 2;
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '\\')
+			i++;
+		else if (str[i] == '|')
+			alloc_cmd++;
+		i++;
+	}
+	i = 0;
+	g_ms->cmd_node = ft_calloc(alloc_cmd, sizeof(t_cmd*));
+	while (alloc_cmd--)
+		g_ms->cmd_node[i++] = ft_calloc(alloc_cmd, sizeof(t_cmd));
+
+}
+
+
 static void ft_save_history (char *prompt_line)
 {
 	if (*prompt_line)
@@ -29,8 +52,11 @@ void	ft_start_shell (void)
 	char *prompt_line;
 	while (1)
 	{
+		g_ms->pipe = 0;
 		prompt_line = ft_prompt ();
 		ft_save_history(prompt_line);
-		ft_redirect (prompt_line);
+		ft_alloc_cmd (prompt_line);
+		prompt_line = ft_redirect (prompt_line);
+		printf ("%s\n", prompt_line);
 	}
 }

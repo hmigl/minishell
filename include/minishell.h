@@ -11,8 +11,9 @@
 
 typedef struct s_var		t_var;
 typedef struct s_minishell	t_minishell;
+typedef struct s_cmd		t_cmd;
 
-extern t_minishell			g_ms;
+extern t_minishell			*g_ms;
 
 struct s_var {
 	char	*key;
@@ -20,17 +21,31 @@ struct s_var {
 	t_var	*next;
 };
 
+struct s_cmd {
+	char	**argv;
+	int		fd_in;
+	int		fd_out;
+};
+
 struct s_minishell {
 	t_var	*env_var;
+	t_cmd	**cmd_node;
+	int		pipe;
 };
 
 // FUNCTIONS
 void	ft_save_local_env(char **env);
 void	ft_start_shell(void);
-void	ft_redirect(char *prompt_line);
-char	*ft_in_redirect(char *str, char *prompt_line);
+char	*ft_redirect(char *prompt_line);
+char	*ft_out_redirect(char *str, char *prompt_line);
+char	*ft_in_redirect (char *str, char *prompt_line);
 int		ft_next_occurrence(char *str, char y);
 char	*ft_file_name(char *prompt_line, char redirect);
 char	*ft_trim_redirect(char *str);
+void    exec_builtin(t_cmd *cmd);
+int 	is_builtin(t_cmd *cmd);
+void    echo(char **args);
+void	env(void);
+void	pwd(void);
 
 #endif // MINISHELL_H

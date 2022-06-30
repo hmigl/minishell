@@ -1,10 +1,11 @@
 #include "minishell.h"
 
-t_minishell	g_ms;
-
+t_minishell	*g_ms;
+//caramba >1 caramba >2 caraaaaamba <3 carma >1caramba >1 caramba >2 caraaaaamba <3 carma >1
 static void	ms_prepare(char **env)
 {
-	ft_bzero(&g_ms, sizeof(t_minishell));
+	g_ms = ft_calloc (1,sizeof(t_minishell));
+	//ft_bzero((void)g_ms, sizeof(t_minishell));
 	ft_save_local_env(env);
 }
 
@@ -13,8 +14,9 @@ static void	ms_prepare(char **env)
 // com a checagem de quotes
 //
 // remember that argc and argv will probably be unused
-int	main(int argc, char *argv[], char *env[])
+// checar pipes antes de todos !
+int	main(int argc, char *argv[], char *envp[])
 {
-	ms_prepare(env);
+	ms_prepare(envp);
 	ft_start_shell();
 }

@@ -1,41 +1,32 @@
 #include "minishell.h"
 
-static void ft_open_in (char *str, char *prompt_line, int t)
+static void ft_open_in (char *str, char *prompt_line)
 {
 	char	*file_name;
-	int		fd_out;
 
-	file_name = ft_file_name (prompt_line, '>');
+	file_name = ft_file_name (prompt_line, '<');
 	if (!(access(file_name, F_OK)))
 	{
-		if (!access(file_name, W_OK))
+		if (access(file_name, R_OK) < 0)
 		{
-			printf ("nao pode escrever\n");
+			printf ("nao tem acesso\n");
 			return ;
 		}
-		if (t == 1)
-			fd_out = open (file_name, O_WRONLY | O_TRUNC);
-		else
-			fd_out = open (file_name, O_WRONLY | O_APPEND);
+		g_ms->cmd_node[g_ms->pipe]->fd_in = open (file_name, O_RDONLY);
 	}
 	else
-		fd_out =  open (file_name, O_RDWR | O_CREAT | O_APPEND, 0644);
+		printf ("arquivo não existe\n");
 	return ;
 }
-
 
 char	*ft_in_redirect (char *str, char *prompt_line)
 {
 	int i;
-	int t;
 
-	t = 0;
-	i = -1;
-	while (prompt_line[++i] && prompt_line[i] == '>')
-	{
-		if (prompt_line[i] == '>')
-			t++;
-	}
-	ft_open_in (str, prompt_line, t);
+	i = 0;
+	while (prompt_line[i] && prompt_line[i] == '<')
+		i++;
+
+	ft_open_in (str, prompt_line);
 	return (ft_trim_redirect (str));
 }

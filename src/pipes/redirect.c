@@ -1,4 +1,5 @@
 #include "minishell.h"
+
 static void ft_trim_redirect_cpy (char *str, char *rtn)
 {
 	int i;
@@ -21,14 +22,16 @@ static void ft_trim_redirect_cpy (char *str, char *rtn)
 	}
 	while (str[i])
 		rtn[j++] = str[i++];
+	free (str);
+	str = NULL;
 }
 
 char *ft_trim_redirect (char *str)
 {
 	int i;
 	char *rtn;
- 	int alloc;
 	int trim;
+
 	trim = 1;
 	i = 0;
 
@@ -45,10 +48,11 @@ char *ft_trim_redirect (char *str)
 		while (str[i + trim] != ' ' && str[i + trim])
 			trim++;
 	}
-	rtn = ft_calloc (ft_strlen(str) - trim + 1, sizeof(char));
+	rtn = ft_calloc (ft_strlen(str) - trim + 2, sizeof(char));
+	write (1, "trim\n", 6);
 	ft_trim_redirect_cpy (str, rtn);
+	write (1, "trimafter\n", 11);
 	return (rtn);
-
 }
 
 static char *ft_get_file_name (char *prompt_line, char quote)
@@ -68,7 +72,10 @@ static char *ft_get_file_name (char *prompt_line, char quote)
 			i++;
 	}
 	file_name = ft_calloc (i + 1, sizeof(char));
+	write (1, "get_filename\n", 14);
 	ft_strlcpy (file_name, prompt_line, i + 1);
+	write (1, "cpy\n", 5);
+
 	return (file_name);
 }
 
@@ -123,30 +130,33 @@ static int ft_check_quotes (char *prompt_line)
 static char* ft_check_redirect_type (char *str, char *prompt_line, char redirect)
 {
 	if (redirect == '>')
-		str = ft_in_redirect (str, prompt_line);
-	// else
-	// 	str = ft_out_redirect (char *str, char *prompt_line);
+		str = ft_out_redirect (str, prompt_line);
+	 else
+	 	str = ft_in_redirect (str, prompt_line);
 	return (str) ;
 
 }
-
-void ft_redirect (char *prompt_line)
+//colocar checagem em ponto específico fora do redirect (checar quote, checar numero de redirect e checar backslash)
+char *ft_redirect (char *prompt_line)
 {
 	int i;
 	i = -1;
 
 	if (ft_check_quotes (prompt_line))
-		return ;
+		return (prompt_line);
 	while (prompt_line[++i])
 	{
-		if (prompt_line[i] == '\'' || prompt_line[i] == '\"')
+		if (prompt_line[i] == '|')
+			g_ms->pipe++;
+		else if (prompt_line[i] == '\'' || prompt_line[i] == '\"')
 		{
-			i += ft_next_occurrence (&prompt_line[i], prompt_line[i]);
+			i += (ft_next_occurrence (&prompt_line[i], prompt_line[i]));
 		}
-		if (prompt_line[i] == '>' || prompt_line[i] == '<')
+		else if (prompt_line[i] == '>' || prompt_line[i] == '<')
 		{
 			prompt_line = ft_check_redirect_type (prompt_line , &prompt_line[i], prompt_line[i]);
+			i = 0;
 		}
 	}
-	printf ("string after trim =%s \n", prompt_line);
+	return (prompt_line);
 }
