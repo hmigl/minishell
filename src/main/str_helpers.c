@@ -2,7 +2,7 @@
 
 int	ft_next_occurrence (char *str, char y)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[++i])
