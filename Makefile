@@ -15,16 +15,24 @@ vpath %.c src \
 	src/builtins \
 	src/env \
 	src/shell \
-	src/pipes
+	src/pipes \
+	src/parse \
+	src/process
 
 OBJS = $(addprefix $(OBJDIR)/, $(SRC:.c=.o))
 
-SRC = main.c save_local_env.c prompt.c str_helpers.c ms_display_error.c
+SRC = main.c prompt.c str_helpers.c ms_display_error.c
 
-SRC += redirect.c redirect_in.c redirect_out.c
+SRC += save_local_env.c expand_env_var.c #env
+
+SRC += redirect.c redirect_in.c redirect_out.c #pipes
 
 SRC += is_builtin.c exec_builtin.c echo.c \
-	   pwd.c env.c unset.c exit_ms.c
+	   pwd.c env.c unset.c exit_ms.c #buitins
+
+SRC += check_syntax.c convert_chars.c unpipe_and_alloc.c parse.c remove_quotes.c #parse
+
+SRC += start_process.c #process
 
 $(OBJDIR)/%.o: %.c
 	$(CC) $(INCLUDE) -c $< -o $@

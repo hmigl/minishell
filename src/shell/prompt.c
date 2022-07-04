@@ -45,6 +45,21 @@ static char	*ft_prompt(void)
 	return (str);
 }
 
+void ft_print_nodes(void)
+{
+	int i = -1;
+	int j = -1;
+	int k = 0;
+	while (g_ms->cmd_node[++j]->not_parsed)
+	{
+		while (g_ms->cmd_node[j]->argv[++i])
+			printf ("%s->",g_ms->cmd_node[j]->argv[i]);
+		printf ("\nNew command\n");
+		i = -1;
+	}
+
+}
+
 void	ft_start_shell(void)
 {
 	char	*prompt_line;
@@ -52,10 +67,19 @@ void	ft_start_shell(void)
 	while (1)
 	{
 		g_ms->pipe = 0;
+		g_ms->n_cmd = 0;
 		prompt_line = ft_prompt();
 		ft_save_history(prompt_line);
+		if (ft_check_syntax (prompt_line))
+			continue ;
 		ft_alloc_cmd(prompt_line);
-		prompt_line = ft_redirect(prompt_line);
-		printf("%s\n", prompt_line);
+		ft_unpipe_and_alloc (prompt_line);
+		ft_parse ();
+		ft_print_nodes();
+		//ft_process_cmds ();
 	}
 }
+
+
+// quando existirmais de um cmd, as atribuições de variáveis devem ser válidas apenas durante aquela linha de comando
+// talvez uma função "there is only atribuition" pra checar se só tem atribuição, pq se existir algo além ela é atribuida localmente

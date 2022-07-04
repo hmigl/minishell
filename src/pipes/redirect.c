@@ -49,9 +49,7 @@ char *ft_trim_redirect (char *str)
 			trim++;
 	}
 	rtn = ft_calloc (ft_strlen(str) - trim + 2, sizeof(char));
-	write (1, "trim\n", 6);
 	ft_trim_redirect_cpy (str, rtn);
-	write (1, "trimafter\n", 11);
 	return (rtn);
 }
 
@@ -72,10 +70,7 @@ static char *ft_get_file_name (char *prompt_line, char quote)
 			i++;
 	}
 	file_name = ft_calloc (i + 1, sizeof(char));
-	write (1, "get_filename\n", 14);
 	ft_strlcpy (file_name, prompt_line, i + 1);
-	write (1, "cpy\n", 5);
-
 	return (file_name);
 }
 
@@ -134,26 +129,20 @@ static char* ft_check_redirect_type (char *str, char *prompt_line, char redirect
 	return (str) ;
 
 }
-//colocar checagem em ponto específico fora do redirect (checar quote, checar numero de redirect e checar backslash)
+//colocar checagem em ponto específico fora do redirect (checar quote, checar numero de redirect e checar backslash checar &)
 char *ft_redirect (char *prompt_line)
 {
 	int i;
 
 	i = -1;
-	if (ft_check_quotes (prompt_line))
-		return (prompt_line);
 	while (prompt_line[++i])
 	{
-		if (prompt_line[i] == '|')
-			g_ms->pipe++;
-		else if (prompt_line[i] == '\'' || prompt_line[i] == '\"')
-		{
+		if (prompt_line[i] == '\'' || prompt_line[i] == '\"')
 			i += (ft_next_occurrence (&prompt_line[i], prompt_line[i]));
-		}
 		else if (prompt_line[i] == '>' || prompt_line[i] == '<')
 		{
 			prompt_line = ft_check_redirect_type (prompt_line , &prompt_line[i], prompt_line[i]);
-			i = 0;
+			i = -1;
 		}
 	}
 	return (prompt_line);

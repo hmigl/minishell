@@ -18,5 +18,6 @@ static void	ms_prepare(char **env)
 int	main(int argc, char *argv[], char *envp[])
 {
 	ms_prepare(envp);
-	ft_start_shell();
+	ft_start_shell(); // repl (read, eval, print, loop)
+	return (0);
 }
