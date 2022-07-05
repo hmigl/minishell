@@ -13,11 +13,11 @@ static void	ms_prepare(char **env)
 // lembrar de colocar uma checagem de syntax de >> junto
 // com a checagem de quotes
 //
-// remember that argc and argv will probably be unused
+// remember that argc and argv will probably be unused (validate?)
 // checar pipes antes de todos !
-int	main(int argc, char *argv[], char *envp[])
+int	main(int argc, char *argv[], char *envp[]) // maybe use __environ__
 {
 	ms_prepare(envp);
-	ft_start_shell(); // repl (read, eval, print, loop)
+	ft_start_shell(); // change to repl() (read, eval, print, loop)
 	return (0);
 }

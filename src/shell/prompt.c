@@ -60,7 +60,7 @@ void ft_print_nodes(void)
 
 }
 
-void	ft_start_shell(void)
+void	ft_start_shell(void) // move to main
 {
 	char	*prompt_line;
 

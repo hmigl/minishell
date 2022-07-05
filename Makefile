@@ -11,13 +11,13 @@ INCLUDE = -Iinclude -I$(LIBFTDIR)
 CC := gcc -g3
 
 vpath %.c src \
-	src/main \
 	src/builtins \
 	src/env \
 	src/shell \
 	src/pipes \
 	src/parse \
-	src/process
+	src/process \
+	src/utils
 
 OBJS = $(addprefix $(OBJDIR)/, $(SRC:.c=.o))
 
