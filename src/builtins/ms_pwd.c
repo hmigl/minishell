@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-void	pwd(void)
+void	ms_pwd(void)
 {
 	char	*cwd;
 
@@ -9,5 +9,5 @@ void	pwd(void)
 		return ;
 	printf("%s\n", cwd);
 	free(cwd);
-	// g_ms.exit_code = 0;
+	g_ms->exit_code = 0;
 }

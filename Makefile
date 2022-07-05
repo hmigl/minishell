@@ -27,8 +27,9 @@ SRC += save_local_env.c expand_env_var.c #env
 
 SRC += redirect.c redirect_in.c redirect_out.c #pipes
 
-SRC += is_builtin.c exec_builtin.c echo.c \
-	   pwd.c env.c unset.c exit_ms.c #buitins
+SRC += is_builtin.c exec_builtin.c ms_echo.c \
+	   ms_cd.c ms_pwd.c ms_export.c \
+	   ms_unset.c ms_env.c ms_exit.c
 
 SRC += check_syntax.c convert_chars.c unpipe_and_alloc.c parse.c remove_quotes.c #parse
 

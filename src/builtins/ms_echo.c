@@ -1,25 +1,25 @@
 #include "minishell.h"
 
-void    echo(char **args)
+void    ms_echo(char **argv)
 {
 	int is_there_nl;
 	int i;
 
 	is_there_nl = 1;
 	i = 1;
-	if (args[i] && ft_strncmp(args[i], "-n", -1) == 0)
+	if (argv[i] && ft_strncmp(argv[i], "-n", -1) == 0)
 	{
 		is_there_nl = 0;
 		i += 1;
 	}
-	while (args && args[i])
+	while (argv && argv[i])
 	{
-		printf("%s", args[i]);
-		if (args[i + 1])
+		printf("%s", argv[i]);
+		if (argv[i + 1])
 			printf(" ");
 		++i;
 	}
 	if (is_there_nl)
 		printf("\n");
-	// g_ms.exit_code = 0;
+	g_ms->exit_code = 0;
 }

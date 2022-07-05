@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-void	env(void)
+void	ms_env(void)
 {
 	t_var *anchor;
 
@@ -10,5 +10,5 @@ void	env(void)
 		printf("%s=%s\n", anchor->key, anchor->value);
 		anchor = anchor->next;
 	}
-	//g_ms.exit_code = 0;
+	g_ms->exit_code = 0;
 }
