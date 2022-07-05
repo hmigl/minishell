@@ -8,13 +8,16 @@ void ft_expand_var_cmd_node(t_cmd *cmd)
 
 	alloc = 0;
 	i = 0;
-	while (cmd->argv[i])
+	if (cmd->argv)
 	{
-		temp = ft_expand_env_var (cmd->argv[i]);
-		if (temp[0])
-			alloc++;
-		cmd->argv[i] = temp;
-		i++;
+		while (cmd->argv[i])
+			{
+				temp = ft_expand_env_var (cmd->argv[i]);
+				if (temp[0])
+					alloc++;
+				cmd->argv[i] = temp;
+				i++;
+			}
 	}
 	return ;
 }
@@ -29,6 +32,7 @@ void ft_parse (void)
 {
 	int i;
 
+	g_ms->count = 0;
 	i = 0;
 	g_ms->n_cmd = g_ms->pipe + 1;
 	while (g_ms->cmd_node[i]->not_parsed)
@@ -38,6 +42,8 @@ void ft_parse (void)
 		ft_split_space(g_ms->cmd_node[i]);
 		ft_expand_var_cmd_node (g_ms->cmd_node[i]);
 		ft_remove_quotes (g_ms->cmd_node[i]);
+		//ft_save_vars (g_ms->cmd_node[i]);
+		g_ms->count++;
 		i++;
 	}
 	return ;

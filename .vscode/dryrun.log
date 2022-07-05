@@ -1,0 +1,79 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/home/phil/42/gitminishell'
+mkdir objdir
+gcc -g3 -Iinclude -Ilib/libft -c src/main/main.c -o objdir/main.o
+gcc -g3 -Iinclude -Ilib/libft -c src/shell/prompt.c -o objdir/prompt.o
+gcc -g3 -Iinclude -Ilib/libft -c src/main/str_helpers.c -o objdir/str_helpers.o
+gcc -g3 -Iinclude -Ilib/libft -c src/shell/ms_display_error.c -o objdir/ms_display_error.o
+gcc -g3 -Iinclude -Ilib/libft -c src/env/save_local_env.c -o objdir/save_local_env.o
+gcc -g3 -Iinclude -Ilib/libft -c src/env/expand_env_var.c -o objdir/expand_env_var.o
+gcc -g3 -Iinclude -Ilib/libft -c src/pipes/redirect.c -o objdir/redirect.o
+gcc -g3 -Iinclude -Ilib/libft -c src/pipes/redirect_in.c -o objdir/redirect_in.o
+gcc -g3 -Iinclude -Ilib/libft -c src/pipes/redirect_out.c -o objdir/redirect_out.o
+gcc -g3 -Iinclude -Ilib/libft -c src/builtins/is_builtin.c -o objdir/is_builtin.o
+gcc -g3 -Iinclude -Ilib/libft -c src/builtins/exec_builtin.c -o objdir/exec_builtin.o
+gcc -g3 -Iinclude -Ilib/libft -c src/builtins/echo.c -o objdir/echo.o
+gcc -g3 -Iinclude -Ilib/libft -c src/builtins/pwd.c -o objdir/pwd.o
+gcc -g3 -Iinclude -Ilib/libft -c src/builtins/env.c -o objdir/env.o
+gcc -g3 -Iinclude -Ilib/libft -c src/builtins/unset.c -o objdir/unset.o
+gcc -g3 -Iinclude -Ilib/libft -c src/builtins/exit_ms.c -o objdir/exit_ms.o
+gcc -g3 -Iinclude -Ilib/libft -c src/parse/check_syntax.c -o objdir/check_syntax.o
+gcc -g3 -Iinclude -Ilib/libft -c src/parse/convert_chars.c -o objdir/convert_chars.o
+gcc -g3 -Iinclude -Ilib/libft -c src/parse/unpipe_and_alloc.c -o objdir/unpipe_and_alloc.o
+gcc -g3 -Iinclude -Ilib/libft -c src/parse/parse.c -o objdir/parse.o
+gcc -g3 -Iinclude -Ilib/libft -c src/parse/remove_quotes.c -o objdir/remove_quotes.o
+gcc -g3 -Iinclude -Ilib/libft -c src/process/start_process.c -o objdir/start_process.o
+make -C lib/libft --no-print-directory
+mkdir -p obj
+gcc -Wall -Wextra -Werror -ggdb3 -c src/ft_isalnum.c -o obj/ft_isalnum.o
+gcc -Wall -Wextra -Werror -ggdb3 -c src/ft_isalpha.c -o obj/ft_isalpha.o
+gcc -Wall -Wextra -Werror -ggdb3 -c src/ft_isascii.c -o obj/ft_isascii.o
+gcc -Wall -Wextra -Werror -ggdb3 -c src/ft_isdigit.c -o obj/ft_isdigit.o
+gcc -Wall -Wextra -Werror -ggdb3 -c src/ft_isprint.c -o obj/ft_isprint.o
+gcc -Wall -Wextra -Werror -ggdb3 -c src/ft_atoi.c -o obj/ft_atoi.o
+gcc -Wall -Wextra -Werror -ggdb3 -c src/ft_bzero.c -o obj/ft_bzero.o
+gcc -Wall -Wextra -Werror -ggdb3 -c src/ft_calloc.c -o obj/ft_calloc.o
+gcc -Wall -Wextra -Werror -ggdb3 -c src/ft_itoa.c -o obj/ft_itoa.o
+gcc -Wall -Wextra -Werror -ggdb3 -c src/ft_memchr.c -o obj/ft_memchr.o
+gcc -Wall -Wextra -Werror -ggdb3 -c src/ft_memcmp.c -o obj/ft_memcmp.o
+gcc -Wall -Wextra -Werror -ggdb3 -c src/ft_memcpy.c -o obj/ft_memcpy.o
+gcc -Wall -Wextra -Werror -ggdb3 -c src/ft_memmove.c -o obj/ft_memmove.o
+gcc -Wall -Wextra -Werror -ggdb3 -c src/ft_memset.c -o obj/ft_memset.o
+gcc -Wall -Wextra -Werror -ggdb3 -c src/ft_putchar_fd.c -o obj/ft_putchar_fd.o
+gcc -Wall -Wextra -Werror -ggdb3 -c src/ft_putendl_fd.c -o obj/ft_putendl_fd.o
+gcc -Wall -Wextra -Werror -ggdb3 -c src/ft_putnbr_fd.c -o obj/ft_putnbr_fd.o
+gcc -Wall -Wextra -Werror -ggdb3 -c src/ft_putstr_fd.c -o obj/ft_putstr_fd.o
+gcc -Wall -Wextra -Werror -ggdb3 -c src/ft_split.c -o obj/ft_split.o
+gcc -Wall -Wextra -Werror -ggdb3 -c src/ft_strchr.c -o obj/ft_strchr.o
+gcc -Wall -Wextra -Werror -ggdb3 -c src/ft_strdup.c -o obj/ft_strdup.o
+gcc -Wall -Wextra -Werror -ggdb3 -c src/ft_strjoin.c -o obj/ft_strjoin.o
+gcc -Wall -Wextra -Werror -ggdb3 -c src/ft_strlcat.c -o obj/ft_strlcat.o
+gcc -Wall -Wextra -Werror -ggdb3 -c src/ft_strlcpy.c -o obj/ft_strlcpy.o
+gcc -Wall -Wextra -Werror -ggdb3 -c src/ft_strlen.c -o obj/ft_strlen.o
+gcc -Wall -Wextra -Werror -ggdb3 -c src/ft_strmapi.c -o obj/ft_strmapi.o
+gcc -Wall -Wextra -Werror -ggdb3 -c src/ft_striteri.c -o obj/ft_striteri.o
+gcc -Wall -Wextra -Werror -ggdb3 -c src/ft_strncmp.c -o obj/ft_strncmp.o
+gcc -Wall -Wextra -Werror -ggdb3 -c src/ft_strnstr.c -o obj/ft_strnstr.o
+gcc -Wall -Wextra -Werror -ggdb3 -c src/ft_strrchr.c -o obj/ft_strrchr.o
+gcc -Wall -Wextra -Werror -ggdb3 -c src/ft_strtrim.c -o obj/ft_strtrim.o
+gcc -Wall -Wextra -Werror -ggdb3 -c src/ft_substr.c -o obj/ft_substr.o
+gcc -Wall -Wextra -Werror -ggdb3 -c src/ft_tolower.c -o obj/ft_tolower.o
+gcc -Wall -Wextra -Werror -ggdb3 -c src/ft_toupper.c -o obj/ft_toupper.o
+gcc -Wall -Wextra -Werror -ggdb3 -c src/ft_checks_ext.c -o obj/ft_checks_ext.o
+gcc -Wall -Wextra -Werror -ggdb3 -c src/ft_lstnew.c -o obj/ft_lstnew.o
+gcc -Wall -Wextra -Werror -ggdb3 -c src/ft_lstadd_front.c -o obj/ft_lstadd_front.o
+gcc -Wall -Wextra -Werror -ggdb3 -c src/ft_lstsize.c -o obj/ft_lstsize.o
+gcc -Wall -Wextra -Werror -ggdb3 -c src/ft_lstlast.c -o obj/ft_lstlast.o
+gcc -Wall -Wextra -Werror -ggdb3 -c src/ft_lstadd_back.c -o obj/ft_lstadd_back.o
+gcc -Wall -Wextra -Werror -ggdb3 -c src/ft_lstdelone.c -o obj/ft_lstdelone.o
+gcc -Wall -Wextra -Werror -ggdb3 -c src/ft_lstclear.c -o obj/ft_lstclear.o
+gcc -Wall -Wextra -Werror -ggdb3 -c src/ft_lstiter.c -o obj/ft_lstiter.o
+gcc -Wall -Wextra -Werror -ggdb3 -c src/ft_lstmap.c -o obj/ft_lstmap.o
+gcc -Wall -Wextra -Werror -ggdb3 -c src/ft_free_matrix.c -o obj/ft_free_matrix.o
+gcc -Wall -Wextra -Werror -ggdb3 -c src/ft_isnumber.c -o obj/ft_isnumber.o
+gcc -Wall -Wextra -Werror -ggdb3 -c src/ft_atol.c -o obj/ft_atol.o
+gcc -Wall -Wextra -Werror -ggdb3 -c src/ft_strcmp.c -o obj/ft_strcmp.o
+ar -rcs libft.a obj/ft_isalnum.o obj/ft_isalpha.o obj/ft_isascii.o obj/ft_isdigit.o obj/ft_isprint.o obj/ft_atoi.o obj/ft_bzero.o obj/ft_calloc.o obj/ft_itoa.o obj/ft_memchr.o obj/ft_memcmp.o obj/ft_memcpy.o obj/ft_memmove.o obj/ft_memset.o obj/ft_putchar_fd.o obj/ft_putendl_fd.o obj/ft_putnbr_fd.o obj/ft_putstr_fd.o obj/ft_split.o obj/ft_strchr.o obj/ft_strdup.o obj/ft_strjoin.o obj/ft_strlcat.o obj/ft_strlcpy.o obj/ft_strlen.o obj/ft_strmapi.o obj/ft_striteri.o obj/ft_strncmp.o obj/ft_strnstr.o obj/ft_strrchr.o obj/ft_strtrim.o obj/ft_substr.o obj/ft_tolower.o obj/ft_toupper.o obj/ft_checks_ext.o obj/ft_lstnew.o obj/ft_lstadd_front.o obj/ft_lstsize.o obj/ft_lstlast.o obj/ft_lstadd_back.o obj/ft_lstdelone.o obj/ft_lstclear.o obj/ft_lstiter.o obj/ft_lstmap.o obj/ft_free_matrix.o obj/ft_isnumber.o obj/ft_atol.o obj/ft_strcmp.o
+gcc -g3 objdir/main.o objdir/prompt.o objdir/str_helpers.o objdir/ms_display_error.o objdir/save_local_env.o objdir/expand_env_var.o objdir/redirect.o objdir/redirect_in.o objdir/redirect_out.o objdir/is_builtin.o objdir/exec_builtin.o objdir/echo.o objdir/pwd.o objdir/env.o objdir/unset.o objdir/exit_ms.o objdir/check_syntax.o objdir/convert_chars.o objdir/unpipe_and_alloc.o objdir/parse.o objdir/remove_quotes.o objdir/start_process.o -o minishell -lreadline -lft -Llib/libft
+make: Leaving directory '/home/phil/42/gitminishell'
+ 

@@ -12,7 +12,7 @@ static void ft_open_in (char *str, char *prompt_line)
 			printf ("nao tem acesso\n");
 			return ;
 		}
-		g_ms->cmd_node[g_ms->pipe]->fd_in = open (file_name, O_RDONLY);
+		g_ms->cmd_node[g_ms->count]->fd_in = open (file_name, O_RDONLY);
 	}
 	else
 		printf ("arquivo não existe\n");
@@ -26,7 +26,6 @@ char	*ft_in_redirect (char *str, char *prompt_line)
 	i = 0;
 	while (prompt_line[i] && prompt_line[i] == '<')
 		i++;
-
 	ft_open_in (str, prompt_line);
 	return (ft_trim_redirect (str));
 }

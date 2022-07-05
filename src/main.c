@@ -15,9 +15,11 @@ static void	ms_prepare(char **env)
 //
 // remember that argc and argv will probably be unused (validate?)
 // checar pipes antes de todos !
+// checar redirect = >1 > 2 >3 <1 | >5 >6
 int	main(int argc, char *argv[], char *envp[]) // maybe use __environ__
 {
 	ms_prepare(envp);
 	ft_start_shell(); // change to repl() (read, eval, print, loop)
 	return (0);
 }
+

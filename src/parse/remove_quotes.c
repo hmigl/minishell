@@ -59,10 +59,13 @@ void ft_remove_quotes (t_cmd *cmd)
 	int j;
 
 	j = 0;
-	while (cmd->argv[j])
+	if (cmd->argv)
 	{
-		cmd->argv[j] = ft_remove_quote_from_str(cmd->argv[j]);
-		j++;
+		while (cmd->argv[j])
+		{
+			cmd->argv[j] = ft_remove_quote_from_str(cmd->argv[j]);
+			j++;
+		}
 	}
 	return ;
 }

@@ -7,7 +7,7 @@ void	rm_single_node(t_var *node)
 	free(node);
 }
 
-static void	ft_insert_nodes_in_struct(char *key, char *value)
+void	ft_insert_nodes_in_struct(char *key, char *value)
 {
 	t_var	*anchor;
 	t_var	*new_node;
@@ -22,7 +22,7 @@ static void	ft_insert_nodes_in_struct(char *key, char *value)
 	{
 		while (anchor->next)
 		{
-			if (!(ft_strcmp (anchor->key, key)))
+			if (!(ft_strcmp(anchor->key, key)))
 			{
 				free (anchor->value);
 				free (key);

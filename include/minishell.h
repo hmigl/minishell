@@ -36,6 +36,7 @@ struct s_cmd {
 struct s_minishell {
 	t_var	*env_var;
 	t_cmd	**cmd_node;
+	int		count;
 	int		pipe;
 	int		exit_code;
 	int		n_cmd;
@@ -55,6 +56,7 @@ char	*ft_trim_redirect(char *str);
 
 // ENV
 void	ft_save_local_env(char **env);
+void	ft_insert_nodes_in_struct(char *key, char *value);
 void	rm_single_node(t_var *node);
 char	*ft_expand_env_var(char *cmd);
 
