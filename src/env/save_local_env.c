@@ -24,9 +24,10 @@ void	ft_insert_nodes_in_struct(char *key, char *value)
 		{
 			if (!(ft_strcmp(anchor->key, key)))
 			{
-				free (anchor->value);
-				free (key);
+				free(anchor->value);
+				free(key);
 				anchor->value = value;
+				free(new_node);
 				return ;
 			}
 			anchor = anchor->next;

@@ -58,7 +58,10 @@ char	*ft_trim_redirect(char *str);
 void	ft_save_local_env(char **env);
 void	ft_insert_nodes_in_struct(char *key, char *value);
 void	rm_single_node(t_var *node);
+
+// EXPANSION
 char	*ft_expand_env_var(char *cmd);
+char	*ft_find(char *variable, char *command);
 
 // BUILTINS
 int		is_builtin(t_cmd *cmd);

@@ -8,6 +8,7 @@ void	ms_cd(char **argv)
 {
 	char	*dir;
 	char	*oldpwd;
+	char	*hold_home_value;
 	int		operation_status;
 
 	operation_status = 0;
@@ -21,7 +22,10 @@ void	ms_cd(char **argv)
 	else if (argv[1] == NULL || !ft_strncmp(argv[1], "~", -1))
 	{
 		operation_status = -1;
-		// get HOME value -> if set then chdir -> status = chdir -> free afterwards
+		hold_home_value = ft_find(ft_strdup("$HOME"), ft_strdup("$HOME"));
+		if (hold_home_value[0])
+			operation_status = chdir(hold_home_value);
+		free(hold_home_value);
 	}
 	else
 		operation_status = chdir(argv[1]);
@@ -51,8 +55,6 @@ static void	cd_failed(char *dir)
 
 static void	update_pwd(char *oldpwd)
 {
-	ms_unset("PWD");
-	ms_unset("OLDPWD");
-	// ft_insert_nodes_in_struct(ft_strdup("OLDPWD"), oldpwd);
-	// ft_insert_nodes_in_struct(ft_strdup("PWD"), ft_strdup(getcwd(NULL, 0)));
+	ft_insert_nodes_in_struct(ft_strdup("OLDPWD"), oldpwd);
+	ft_insert_nodes_in_struct(ft_strdup("PWD"), ft_strdup(getcwd(NULL, 0)));
 }

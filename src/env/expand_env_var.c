@@ -1,47 +1,49 @@
 #include "minishell.h"
 
-static char *ft_convert (char *content, char *key, char *command)
+static char	*ft_convert(char *content, char *key, char *cmd)
 {
-	int i;
-	int k;
-	int c;
-	char *convert;
+	int		i;
+	int		k;
+	int		c;
+	char	*convert;
+	size_t	aux;
 
 	k = -1;
 	i = -1;
 	c = -1;
-	convert = ft_calloc (ft_strlen(command) + ft_strlen(content) - ft_strlen(key) , sizeof(char));
-	while (command[++i])
+	aux = ft_strlen(cmd) + ft_strlen(content) - ft_strlen(key);
+	convert = ft_calloc(aux, sizeof(char));
+	while (cmd[++i])
 	{
-		if (command[i] == '$')
+		if (cmd[i] == '$')
 		{
 			while (content[++k])
 				convert[++c] = content[k];
 			i++;
-			while (command[i] && command[i] != ' ' && command[i] != '\'' && command[i] != '\"' && command[i] != '$')
+			while (cmd[i] && cmd[i] != ' ' && cmd[i] != '\'' && cmd[i] != '\"' && cmd[i] != '$') // refactor (too long)
 				i++;
-			break;
+			break ;
 		}
 		else
-			convert[++c] = command[i];
+			convert[++c] = cmd[i];
 	}
-	while (command[i])
-		convert[++c] = command[i++];
-	free (command);
+	while (cmd[i])
+		convert[++c] = cmd[i++];
+	free(cmd);
 	return (convert);
 }
 
-static char *ft_cannot_find (char *variable, char *command)
+static char	*ft_cannot_find(char *variable, char *command)
 {
-	int i;
-	int k;
-	char *convert;
+	int		i;
+	int		k;
+	char	*convert;
 
 	k = -1;
 	i = 1;
 	while (variable[i] && variable[i] != ' ' && variable[i] != '\'' && variable[i] != '\"' && variable[i] != '$')
 		i++;
-	convert = ft_calloc (ft_strlen(command) - i + 1, sizeof(char));
+	convert = ft_calloc(ft_strlen(command) - i + 1, sizeof(char));
 	i = 0;
 	while (command[++k] != '$' && command[k])
 		convert[i++] = command[k];
@@ -50,15 +52,15 @@ static char *ft_cannot_find (char *variable, char *command)
 		k++;
 	while (command[k])
 		convert[i++] = command[k++];
-	free (command);
+	free(command);
 	return (convert);
 }
 
-static char *ft_find (char *variable, char *command)
+char	*ft_find(char *variable, char *command)
 {
-	int i;
-	int bigger;
-	t_var *anchor;
+	int		i;
+	int		bigger;
+	t_var	*anchor;
 
 	anchor = g_ms->env_var;
 	i = 1;
@@ -69,26 +71,27 @@ static char *ft_find (char *variable, char *command)
 		bigger = i - 1;
 		if (ft_strlen(anchor->key) > i -1)
 			bigger = ft_strlen(anchor->key);
-		if (!(ft_strncmp (anchor->key, &variable[1], bigger)))
+		if (!(ft_strncmp(anchor->key, &variable[1], bigger)))
 			return (ft_convert(anchor->value, anchor->key, command));
 		else
 			anchor = anchor->next;
 	}
-	return (ft_cannot_find (variable, command));
+	return (ft_cannot_find(variable, command));
 }
 
-char *ft_expand_env_var (char *cmd)
+char	*ft_expand_env_var(char *cmd)
 {
- 	int i;
-	int trigger = 0;
+	int	i;
+	int	trigger;
 
+	trigger = 0;
 	i = -1;
  	while (cmd[++i])
 	{
 		if (cmd[i] == '\"')
 			trigger = 1;
 		else if (cmd[i] == '\'' && !trigger)
-			i += ft_next_occurrence (&cmd[i], '\'');
+			i += ft_next_occurrence(&cmd[i], '\'');
 		else if (cmd[i] == '$' && cmd[i + 1] != ' ' && cmd[i + 1])
 		{
 			cmd = ft_find(&cmd[i], cmd);
