@@ -19,8 +19,7 @@ void	ms_export(char *statement)
 	splited = ft_split(statement, '=');
 	key = splited[0];
 	value = splited[1];
-	ms_unset(key);
-	// ft_insert_nodes_in_struct(key, value);
+	ft_insert_nodes_in_struct(key, value);
 	g_ms->exit_code = 0;
 }
 
