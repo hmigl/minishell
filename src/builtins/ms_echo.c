@@ -1,9 +1,9 @@
 #include "minishell.h"
 
-void    ms_echo(char **argv)
+void	ms_echo(char **argv)
 {
-	int is_there_nl;
-	int i;
+	int	is_there_nl;
+	int	i;
 
 	is_there_nl = 1;
 	i = 1;
