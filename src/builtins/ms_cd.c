@@ -3,7 +3,7 @@
 static void	act_according_to_status(int status, char *dir);
 static void	update_pwd(char *oldpwd);
 static void	cd_failed(char *dir);
-
+//free nas strdup é necessário !!!!!!!!!!!
 void	ms_cd(char **argv)
 {
 	char	*dir;
@@ -55,6 +55,6 @@ static void	cd_failed(char *dir)
 
 static void	update_pwd(char *oldpwd)
 {
-	ft_insert_nodes_in_struct(ft_strdup("OLDPWD"), oldpwd);
-	ft_insert_nodes_in_struct(ft_strdup("PWD"), ft_strdup(getcwd(NULL, 0)));
+	g_ms->env_var = ft_insert_nodes_in_struct(ft_strdup("OLDPWD"), oldpwd, g_ms->env_var);
+	g_ms->env_var = ft_insert_nodes_in_struct(ft_strdup("PWD"), ft_strdup(getcwd(NULL, 0)), g_ms->env_var);
 }

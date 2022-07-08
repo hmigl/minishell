@@ -52,12 +52,13 @@ void ft_print_nodes(void)
 	int k = 0;
 	while (g_ms->cmd_node[++j]->not_parsed)
 	{
+		printf ("New command\n");
 		if (g_ms->cmd_node[j]->argv)
 		{
 			while (g_ms->cmd_node[j]->argv[++i])
 				printf ("%s->",g_ms->cmd_node[j]->argv[i]);
 		}
-		printf ("\nNew command\n");
+		printf ("\n");
 		i = -1;
 	}
 }

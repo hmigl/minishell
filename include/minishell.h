@@ -35,6 +35,7 @@ struct s_cmd {
 
 struct s_minishell {
 	t_var	*env_var;
+	t_var	*local_var;
 	t_cmd	**cmd_node;
 	int		count;
 	int		pipe;
@@ -46,6 +47,7 @@ struct s_minishell {
 void	ft_start_shell(void);
 void	ms_display_error(char *id, char *err, int should_quit);
 int		ft_next_occurrence (char *str, char y);
+void	*ft_free_double_pointer (char **pointer);
 
 // REDIRECT
 char	*ft_redirect(char *prompt_line);
@@ -55,9 +57,11 @@ char	*ft_file_name(char *prompt_line, char redirect);
 char	*ft_trim_redirect(char *str);
 
 // ENV
-void	ft_save_local_env(char **env);
-void	ft_insert_nodes_in_struct(char *key, char *value);
+void	ft_import_env(char **env);
+t_var	*ft_insert_nodes_in_struct(char *key, char *value, t_var *var_struct);
 void	rm_single_node(t_var *node);
+char	**ft_save_env_vars (t_cmd *cmd);
+int		ft_have_a_var_to_save (char *str);
 
 // EXPANSION
 char	*ft_expand_env_var(char *cmd);
@@ -81,6 +85,7 @@ void 	ft_re_convert_chars(char *str, char convert);
 void	ft_convert_chars(char *str, char convert);
 void	ft_parse(void);
 void	ft_remove_quotes(t_cmd *cmd);
+char	**ft_remove_var_atrib_and_equals (char **argv);
 
 // PROCESS
 void	ft_process_cmds(void);

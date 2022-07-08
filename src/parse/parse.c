@@ -41,8 +41,10 @@ void ft_parse (void)
 		//chechar se tem erro no redirect (variavel :g_ms->cmd_node[i]->error)
 		ft_split_space(g_ms->cmd_node[i]);
 		ft_expand_var_cmd_node (g_ms->cmd_node[i]);
-		ft_remove_quotes (g_ms->cmd_node[i]);
-		//ft_save_vars (g_ms->cmd_node[i]);
+		g_ms->cmd_node[i]->argv = ft_save_env_vars (g_ms->cmd_node[i]);
+
+		//ft_remove_quotes (g_ms->cmd_node[i]);
+
 		g_ms->count++;
 		i++;
 	}

@@ -7,17 +7,17 @@ void	rm_single_node(t_var *node)
 	free(node);
 }
 
-void	ft_insert_nodes_in_struct(char *key, char *value)
+t_var	*ft_insert_nodes_in_struct(char *key, char *value, t_var *var_struct)
 {
 	t_var	*anchor;
 	t_var	*new_node;
 
-	anchor = g_ms->env_var;
+	anchor = var_struct;
 	new_node = ft_calloc(sizeof(t_var), 1);
 	new_node->key = key;
 	new_node->value = value;
 	if (anchor == NULL)
-		g_ms->env_var = new_node;
+		var_struct = new_node;
 	else
 	{
 		while (anchor->next)
@@ -28,24 +28,25 @@ void	ft_insert_nodes_in_struct(char *key, char *value)
 				free(key);
 				anchor->value = value;
 				free(new_node);
-				return ;
+				return (var_struct) ;
 			}
 			anchor = anchor->next;
 		}
 		anchor->next = new_node;
 	}
+	return (var_struct);
 }
 
-void	ft_save_local_env(char **env)
+void	ft_import_env(char **env)
 {
 	int		i;
-	char	**splited;
+	char	**split;
 
 	i = 0;
 	while (env[i])
 	{
-		splited = ft_split(env[i], '=');
-		ft_insert_nodes_in_struct(splited[0], splited[1]);
+		split = ft_split(env[i], '=');
+		g_ms->env_var = ft_insert_nodes_in_struct(split[0], split[1], g_ms->env_var);
 		i++;
 	}
 	return ;
