@@ -21,7 +21,7 @@ vpath %.c src \
 
 OBJS = $(addprefix $(OBJDIR)/, $(SRC:.c=.o))
 
-SRC = main.c prompt.c str_helpers.c ms_display_error.c free_functions.c #utils
+SRC = main.c prompt.c str_helpers.c ms_display_error.c free_functions.c save_paths.c #utils
 
 SRC += import_env.c expand_env_var.c save_env_var.c #env
 
@@ -34,7 +34,7 @@ SRC += is_builtin.c exec_builtin.c ms_echo.c \
 SRC += check_syntax.c convert_chars.c unpipe_and_alloc.c \
 		parse.c remove_env_var.c remove_quotes.c    #parse
 
-SRC += start_process.c #process
+SRC += start_process.c check_exec.c #process
 
 $(OBJDIR)/%.o: %.c
 	$(CC) $(INCLUDE) -c $< -o $@

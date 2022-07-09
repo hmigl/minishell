@@ -7,6 +7,7 @@ static void	ms_prepare(char **env)
 	g_ms = ft_calloc (1,sizeof(t_minishell));
 	//ft_bzero((void)g_ms, sizeof(t_minishell));
 	ft_import_env(env);
+	ft_save_paths();
 }
 
 // TODO:

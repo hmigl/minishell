@@ -11,6 +11,7 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 
+
 typedef struct s_var		t_var;
 typedef struct s_minishell	t_minishell;
 typedef struct s_cmd		t_cmd;
@@ -26,7 +27,9 @@ struct s_var {
 
 struct s_cmd {
 	char	**argv;
+	char	*cmd_path;
 	char	*not_parsed;
+	int		pipe[2];
 	int		fd_in;
 	int		fd_out;
 	int 	error;
@@ -37,6 +40,7 @@ struct s_minishell {
 	t_var	*env_var;
 	t_var	*local_var;
 	t_cmd	**cmd_node;
+	char	**path;
 	int		count;
 	int		pipe;
 	int		exit_code;
@@ -48,6 +52,7 @@ void	ft_start_shell(void);
 void	ms_display_error(char *id, char *err, int should_quit);
 int		ft_next_occurrence (char *str, char y);
 void	*ft_free_double_pointer (char **pointer);
+void	ft_save_paths (void);
 
 // REDIRECT
 char	*ft_redirect(char *prompt_line);
@@ -84,10 +89,12 @@ void	ft_unpipe_and_alloc(char *prompt_line);
 void 	ft_re_convert_chars(char *str, char convert);
 void	ft_convert_chars(char *str, char convert);
 void	ft_parse(void);
-void	ft_remove_quotes(t_cmd *cmd);
+void	ft_remove_quotes_from_cmd_node (t_cmd *cmd);
 char	**ft_remove_var_atrib_and_equals (char **argv);
+char	*ft_remove_quote_from_str (char *argv);
 
 // PROCESS
 void	ft_process_cmds(void);
+void	ft_check_exec (t_cmd *cmd);
 
 #endif // MINISHELL_H

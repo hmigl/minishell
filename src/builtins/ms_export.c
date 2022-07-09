@@ -30,7 +30,7 @@ static void	show_names_n_values(void)
 	anchor = g_ms->env_var;
 	while (anchor)
 	{
-		printf("declare -x %s=\"%s\"", anchor->key, anchor->value);
+		printf("declare -x %s=\"%s\"\n", anchor->key, anchor->value);
 		anchor = anchor->next;
 	}
 }

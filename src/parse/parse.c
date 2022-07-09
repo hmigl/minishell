@@ -42,9 +42,7 @@ void ft_parse (void)
 		ft_split_space(g_ms->cmd_node[i]);
 		ft_expand_var_cmd_node (g_ms->cmd_node[i]);
 		g_ms->cmd_node[i]->argv = ft_save_env_vars (g_ms->cmd_node[i]);
-
-		//ft_remove_quotes (g_ms->cmd_node[i]);
-
+		ft_remove_quotes_from_cmd_node (g_ms->cmd_node[i]);
 		g_ms->count++;
 		i++;
 	}

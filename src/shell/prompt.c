@@ -78,8 +78,8 @@ void	ft_start_shell(void) // move to main
 		ft_alloc_cmd(prompt_line);
 		ft_unpipe_and_alloc (prompt_line);
 		ft_parse ();
-		ft_print_nodes();
-		//ft_process_cmds ();
+		ft_process_cmds ();
+		//ft_print_nodes();
 	}
 }
 

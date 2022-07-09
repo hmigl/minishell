@@ -18,7 +18,6 @@ int ft_have_a_var_to_save (char *str)
 	return (0);
 }
 
-
 static int	ft_is_local_var (char **cmd)
 {
 	int i;
@@ -54,6 +53,7 @@ static void ft_save_var_in_correct_struct (char **argv, int has_only_var)
 		ft_convert_chars (argv[i], '=');
 		split = ft_split(argv[i], 127);
 		ft_re_convert_chars (argv[i], '=');
+		split[1] = ft_remove_quote_from_str (split[1]);
 		if (has_only_var)
 			g_ms->env_var = ft_insert_nodes_in_struct(split[0], split[1], g_ms->env_var);
 		else
