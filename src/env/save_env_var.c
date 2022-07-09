@@ -55,9 +55,9 @@ static void ft_save_var_in_correct_struct (char **argv, int has_only_var)
 		ft_re_convert_chars (argv[i], '=');
 		split[1] = ft_remove_quote_from_str (split[1]);
 		if (has_only_var)
-			g_ms->env_var = ft_insert_nodes_in_struct(split[0], split[1], g_ms->env_var);
+			g_ms->env_var = add_vars_to_env(split[0], split[1], g_ms->env_var);
 		else
-			g_ms->local_var = ft_insert_nodes_in_struct(split[0], split[1], g_ms->local_var);
+			g_ms->local_var = add_vars_to_env(split[0], split[1], g_ms->local_var);
 	}
 
 }

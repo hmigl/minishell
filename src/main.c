@@ -1,26 +1,38 @@
 #include "minishell.h"
 
 t_minishell	*g_ms;
-//caramba >1 caramba >2 caraaaaamba <3 carma >1caramba >1 caramba >2 caraaaaamba <3 carma >1
+
+static void	repl(void)
+{
+	char	*prompt_line;
+
+	while (1)
+	{
+		g_ms->pipe = 0;
+		g_ms->n_cmd = 0;
+		prompt_line = ft_prompt();
+		ft_save_history(prompt_line);
+		if (ft_check_syntax(prompt_line))
+			continue ;
+		ft_alloc_cmd(prompt_line);
+		ft_unpipe_and_alloc(prompt_line);
+		ft_parse();
+		ft_process_cmds();
+		//ft_print_nodes();
+	}
+}
+
 static void	ms_prepare(char **env)
 {
-	g_ms = ft_calloc (1,sizeof(t_minishell));
-	//ft_bzero((void)g_ms, sizeof(t_minishell));
+	g_ms = ft_calloc (1,sizeof(t_minishell)); // check return and exit if NULL
 	ft_import_env(env);
 	ft_save_paths();
+	g_ms->exit_code = 0;
 }
 
-// TODO:
-// lembrar de colocar uma checagem de syntax de >> junto
-// com a checagem de quotes
-//
-// remember that argc and argv will probably be unused (validate?)
-// checar pipes antes de todos !
-// checar redirect = >1 > 2 >3 <1 | >5 >6
-int	main(int argc, char *argv[], char *envp[]) // maybe use __environ__
+int	main(int argc, char *argv[], char *envp[])
 {
 	ms_prepare(envp);
-	ft_start_shell(); // change to repl() (read, eval, print, loop)
+	repl();
 	return (0);
 }
-

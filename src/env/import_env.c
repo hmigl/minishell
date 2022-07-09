@@ -7,7 +7,7 @@ void	rm_single_node(t_var *node)
 	free(node);
 }
 
-t_var	*ft_insert_nodes_in_struct(char *key, char *value, t_var *var_struct)
+t_var	*add_vars_to_env(char *key, char *value, t_var *var_struct)
 {
 	t_var	*anchor;
 	t_var	*new_node;
@@ -28,7 +28,7 @@ t_var	*ft_insert_nodes_in_struct(char *key, char *value, t_var *var_struct)
 				free(key);
 				anchor->value = value;
 				free(new_node);
-				return (var_struct) ;
+				return (var_struct);
 			}
 			anchor = anchor->next;
 		}
@@ -46,7 +46,7 @@ void	ft_import_env(char **env)
 	while (env[i])
 	{
 		split = ft_split(env[i], '=');
-		g_ms->env_var = ft_insert_nodes_in_struct(split[0], split[1], g_ms->env_var);
+		g_ms->env_var = add_vars_to_env(split[0], split[1], g_ms->env_var);
 		i++;
 	}
 	return ;

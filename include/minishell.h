@@ -12,7 +12,6 @@
 # include <sys/wait.h>
 # include <signal.h>
 
-
 typedef struct s_var		t_var;
 typedef struct s_minishell	t_minishell;
 typedef struct s_cmd		t_cmd;
@@ -49,15 +48,17 @@ struct s_minishell {
 };
 
 //  SUPPORT
-void	ft_start_shell(void);
 void	ms_display_error(char *id, char *err, int should_quit);
-int		ft_next_occurrence (char *str, char y);
-void	*ft_free_double_pointer (char **pointer);
-void	ft_save_paths (void);
+int		ft_next_occurrence(char *str, char y);
+void	*ft_free_double_pointer(char **pointer);
+void	ft_save_paths(void);
 int		ft_next_occurrence(char *str, char y);
 void	*ft_free_double_pointer(char **pointer);
 void	stdin_sig(void);
 void	exec_sig(void);
+char	*ft_prompt(void);
+void	ft_save_history(char *prompt_line);
+void	ft_alloc_cmd(char *str);
 
 // REDIRECT
 char	*ft_redirect(char *prompt_line);
@@ -68,7 +69,7 @@ char	*ft_trim_redirect(char *str);
 
 // ENV
 void	ft_import_env(char **env);
-t_var	*ft_insert_nodes_in_struct(char *key, char *value, t_var *var_struct);
+t_var	*add_vars_to_env(char *key, char *value, t_var *var_struct);
 void	rm_single_node(t_var *node);
 char	**ft_save_env_vars(t_cmd *cmd);
 int		ft_have_a_var_to_save(char *str);
@@ -94,12 +95,12 @@ void	ft_unpipe_and_alloc(char *prompt_line);
 void	ft_re_convert_chars(char *str, char convert);
 void	ft_convert_chars(char *str, char convert);
 void	ft_parse(void);
-void	ft_remove_quotes_from_cmd_node (t_cmd *cmd);
-char	**ft_remove_var_atrib_and_equals (char **argv);
-char	*ft_remove_quote_from_str (char *argv);
+void	ft_remove_quotes_from_cmd_node(t_cmd *cmd);
+char	**ft_remove_var_atrib_and_equals(char **argv);
+char	*ft_remove_quote_from_str(char *argv);
 
 // PROCESS
 void	ft_process_cmds(void);
-void	ft_check_exec (t_cmd *cmd);
+void	ft_check_exec(t_cmd *cmd);
 
 #endif // MINISHELL_H

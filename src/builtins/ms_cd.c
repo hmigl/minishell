@@ -55,6 +55,6 @@ static void	cd_failed(char *dir)
 
 static void	update_pwd(char *oldpwd)
 {
-	g_ms->env_var = ft_insert_nodes_in_struct(ft_strdup("OLDPWD"), oldpwd, g_ms->env_var);
-	g_ms->env_var = ft_insert_nodes_in_struct(ft_strdup("PWD"), ft_strdup(getcwd(NULL, 0)), g_ms->env_var);
+	g_ms->env_var = add_vars_to_env(ft_strdup("OLDPWD"), oldpwd, g_ms->env_var);
+	g_ms->env_var = add_vars_to_env(ft_strdup("PWD"), ft_strdup(getcwd(NULL, 0)), g_ms->env_var);
 }
