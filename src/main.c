@@ -24,7 +24,7 @@ static void	repl(void)
 
 static void	ms_prepare(char **env)
 {
-	g_ms = ft_calloc (1,sizeof(t_minishell)); // check return and exit if NULL
+	g_ms = ft_calloc(1, sizeof(t_minishell)); // check return and exit if NULL
 	ft_import_env(env);
 	ft_save_paths();
 	g_ms->exit_code = 0;
@@ -32,6 +32,11 @@ static void	ms_prepare(char **env)
 
 int	main(int argc, char *argv[], char *envp[])
 {
+	if (argc > 1 && argv)
+	{
+		ft_putendl_fd("usage: ./minishell", STDERR_FILENO);
+		return (1);
+	}
 	ms_prepare(envp);
 	repl();
 	return (0);
