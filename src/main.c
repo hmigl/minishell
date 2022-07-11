@@ -8,12 +8,16 @@ static void	repl(void)
 
 	while (1)
 	{
+		stdin_sig();
 		g_ms->pipe = 0;
 		g_ms->n_cmd = 0;
 		prompt_line = ft_prompt();
 		ft_save_history(prompt_line);
 		if (ft_check_syntax(prompt_line))
+		{
+			free(prompt_line);
 			continue ;
+		}
 		ft_alloc_cmd(prompt_line);
 		ft_unpipe_and_alloc(prompt_line);
 		ft_parse();

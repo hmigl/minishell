@@ -16,7 +16,7 @@ void	ft_alloc_cmd(char *str)
 		i++;
 	}
 	i = 0;
-	g_ms->cmd_node = ft_calloc(alloc_cmd, sizeof(t_cmd));
+	g_ms->cmd_node = ft_calloc(alloc_cmd, sizeof(t_cmd)); // review
 	while (alloc_cmd--)
 		g_ms->cmd_node[i++] = ft_calloc(alloc_cmd, sizeof(t_cmd));
 }

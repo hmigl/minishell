@@ -36,6 +36,7 @@ static void ft_create_process (t_cmd *cmd)
 	int	wstatus;
 
 	pid = fork ();
+	exec_sig();
 	if (pid == -1)
 		printf ("Error: cannot fork the process\n");
 	if (!pid)
