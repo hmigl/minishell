@@ -45,24 +45,28 @@ static void ft_copy_argv (char *rtn, char *argv)
 	return ;
 }
 
-static char *ft_remove_quote_from_str (char *argv)
+char *ft_remove_quote_from_str (char *argv)
 {
 	char *rtn;
 
 	rtn = ft_alloc_mem (rtn, argv);
 	ft_copy_argv (rtn, argv);
+	free (argv);
 	return (rtn);
 }
 
-void ft_remove_quotes (t_cmd *cmd)
+void	ft_remove_quotes_from_cmd_node (t_cmd *cmd)
 {
 	int j;
 
 	j = 0;
-	while (cmd->argv[j])
+	if (cmd->argv)
 	{
-		cmd->argv[j] = ft_remove_quote_from_str(cmd->argv[j]);
-		j++;
+		while (cmd->argv[j])
+		{
+			cmd->argv[j] = ft_remove_quote_from_str(cmd->argv[j]);
+			j++;
+		}
 	}
 	return ;
 }

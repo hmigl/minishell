@@ -10,6 +10,7 @@
 # include <fcntl.h>
 # include <sys/types.h>
 # include <sys/wait.h>
+# include <signal.h>
 
 typedef struct s_var		t_var;
 typedef struct s_minishell	t_minishell;
@@ -26,26 +27,38 @@ struct s_var {
 
 struct s_cmd {
 	char	**argv;
+	char	*cmd_path;
 	char	*not_parsed;
+	int		pipe[2];
 	int		fd_in;
 	int		fd_out;
-	int 	error;
+	int		error;
 	int		type;
 };
 
 struct s_minishell {
 	t_var	*env_var;
+	t_var	*local_var;
 	t_cmd	**cmd_node;
+	char	**path;
+	int		count;
 	int		pipe;
 	int		exit_code;
 	int		n_cmd;
 };
 
 //  SUPPORT
-void	ft_start_shell(void);
 void	ms_display_error(char *id, char *err, int should_quit);
-int		ft_next_occurrence (char *str, char y);
-
+int		ft_next_occurrence(char *str, char y);
+void	*ft_free_double_pointer(char **pointer);
+void	ft_save_paths(void);
+int		ft_next_occurrence(char *str, char y);
+void	*ft_free_double_pointer(char **pointer);
+void	stdin_sig(void);
+void	exec_sig(void);
+char	*ft_prompt(void);
+void	ft_save_history(char *prompt_line);
+void	ft_alloc_cmd(char *str);
 
 // REDIRECT
 char	*ft_redirect(char *prompt_line);
@@ -55,26 +68,39 @@ char	*ft_file_name(char *prompt_line, char redirect);
 char	*ft_trim_redirect(char *str);
 
 // ENV
-void	ft_save_local_env(char **env);
+void	ft_import_env(char **env);
+t_var	*add_vars_to_env(char *key, char *value, t_var *var_struct);
 void	rm_single_node(t_var *node);
-char	*ft_expand_env_var (char *cmd);
+char	**ft_save_env_vars(t_cmd *cmd);
+int		ft_have_a_var_to_save(char *str);
+
+// EXPANSION
+char	*ft_expand_env_var(char *cmd);
+char	*ft_find(char *variable, char *command);
 
 // BUILTINS
 int		is_builtin(t_cmd *cmd);
 void	exec_builtin(t_cmd *cmd);
-void	echo(char **args);
-void	env(void);
-void	pwd(void);
+void	ms_echo(char **argv);
+void	ms_cd(char **argv);
+void	ms_pwd(void);
+void	ms_export(char *statement);
+void	ms_unset(char *key);
+void	ms_env(void);
+void	ms_exit(char **argv);
 
 // PARSE
 int		ft_check_syntax(char *prompt_line);
-void	ft_unpipe_and_alloc (char *prompt_line);
-void 	ft_re_convert_chars (char *str, char convert);
-void	ft_convert_chars (char *str, char convert);
-void	ft_parse (void);
-void	ft_remove_quotes (t_cmd *cmd);
+void	ft_unpipe_and_alloc(char *prompt_line);
+void	ft_re_convert_chars(char *str, char convert);
+void	ft_convert_chars(char *str, char convert);
+void	ft_parse(void);
+void	ft_remove_quotes_from_cmd_node(t_cmd *cmd);
+char	**ft_remove_var_atrib_and_equals(char **argv);
+char	*ft_remove_quote_from_str(char *argv);
 
 // PROCESS
-void	ft_process_cmds (void);
+void	ft_process_cmds(void);
+void	ft_check_exec(t_cmd *cmd);
 
 #endif // MINISHELL_H
