@@ -42,7 +42,8 @@ struct s_minishell {
 	t_cmd	**cmd_node;
 	char	**path;
 	int		count;
-	int		pipe;
+	int		pipe[2];
+	int		n_pipe;
 	int		exit_code;
 	int		n_cmd;
 };

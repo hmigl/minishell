@@ -25,8 +25,8 @@ static int	ft_check_access(t_cmd *cmd)
 
 static void ft_exec_cmd (t_cmd *cmd)
 {
-	if (g_ms->cmd_node[g_ms->pipe - g_ms->count]->fd_in)
-		close (g_ms->cmd_node[g_ms->pipe - g_ms->count]->fd_in);
+	if (g_ms->cmd_node[g_ms->n_pipe - g_ms->count]->fd_in)
+		close (g_ms->cmd_node[g_ms->n_pipe - g_ms->count]->fd_in);
 	execve (cmd->cmd_path, cmd->argv, g_ms->path);
 }
 
@@ -43,8 +43,8 @@ static void ft_create_process (t_cmd *cmd)
 		ft_exec_cmd(cmd);
 	else
 		waitpid(pid, &wstatus, 0);
-	if (g_ms->cmd_node[g_ms->pipe - g_ms->count]->fd_out)
-		close (g_ms->cmd_node[g_ms->pipe - g_ms->count]->fd_out);
+	if (g_ms->cmd_node[g_ms->n_pipe - g_ms->count]->fd_out)
+		close (g_ms->cmd_node[g_ms->n_pipe - g_ms->count]->fd_out);
 }
 
 void ft_check_exec (t_cmd *cmd)
@@ -52,5 +52,4 @@ void ft_check_exec (t_cmd *cmd)
 	if (ft_check_access(cmd))
 		return ;
 	ft_create_process (cmd);
-
 }

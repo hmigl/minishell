@@ -29,7 +29,7 @@ static void ft_count_pipes (char *prompt_line)
 	while (prompt_line[++i])
 	{
 		if (prompt_line[i] == '|')
-			g_ms->pipe++;
+			g_ms->n_pipe++;
 		else if (prompt_line[i] == '\'' || prompt_line[i] == '\"')
 			i += (ft_next_occurrence (&prompt_line[i], prompt_line[i]));
 	}

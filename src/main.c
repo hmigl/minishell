@@ -9,7 +9,7 @@ static void	repl(void)
 	while (1)
 	{
 		stdin_sig();
-		g_ms->pipe = 0;
+		g_ms->n_pipe = 0;
 		g_ms->n_cmd = 0;
 		prompt_line = ft_prompt();
 		ft_save_history(prompt_line);
