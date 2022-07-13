@@ -33,16 +33,16 @@ struct s_cmd {
 	int		fd_in;
 	int		fd_out;
 	int		error;
-	int		type;
 };
 
 struct s_minishell {
 	t_var	*env_var;
 	t_var	*local_var;
-	t_cmd	**cmd_node;
+	t_cmd	*cmd_node;
 	char	**path;
 	int		count;
-	int		pipe;
+	int		pipe[2];
+	int		n_pipe;
 	int		exit_code;
 	int		n_cmd;
 };
@@ -53,7 +53,7 @@ int		ft_next_occurrence(char *str, char y);
 void	*ft_free_double_pointer(char **pointer);
 void	ft_save_paths(void);
 int		ft_next_occurrence(char *str, char y);
-void	*ft_free_double_pointer(char **pointer);
+void	free_all_struct (int exit);
 void	stdin_sig(void);
 void	exec_sig(void);
 char	*ft_prompt(void);

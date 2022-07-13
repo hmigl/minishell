@@ -69,7 +69,7 @@ char **ft_save_env_vars (t_cmd *cmd)
 	vars = ft_is_local_var(cmd->argv);
 	if (vars == -1)
 		return (cmd->argv) ;
-	else if (vars > 0 || g_ms->pipe)
+	else if (vars > 0 || g_ms->n_pipe)
 		ft_save_var_in_correct_struct (cmd->argv, 0);
 	else
 		ft_save_var_in_correct_struct (cmd->argv, 1);

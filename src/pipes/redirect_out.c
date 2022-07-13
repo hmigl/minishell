@@ -13,12 +13,12 @@ static void ft_open_out (char *str, char *prompt_line, int t)
 			return ;
 		}
 		if (t == 1)
-			g_ms->cmd_node[g_ms->count]->fd_out = open (file_name, O_WRONLY | O_TRUNC);
+			g_ms->cmd_node[g_ms->count].fd_out = open (file_name, O_WRONLY | O_TRUNC);
 		else
-			g_ms->cmd_node[g_ms->count]->fd_out = open (file_name, O_WRONLY | O_APPEND);
+			g_ms->cmd_node[g_ms->count].fd_out = open (file_name, O_WRONLY | O_APPEND);
 	}
 	else
-		g_ms->cmd_node[g_ms->count]->fd_out =  open (file_name, O_RDWR | O_CREAT | O_APPEND, 0644);
+		g_ms->cmd_node[g_ms->count].fd_out =  open (file_name, O_RDWR | O_CREAT | O_APPEND, 0644);
 	return ;
 }
 
