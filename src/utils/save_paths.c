@@ -5,12 +5,12 @@ static void ft_add_slash (void)
 {
 	int i;
 	char *step;
-	char *slash;
 
 	i = -1;
 	while (g_ms->path[++i])
 	{
 		step = ft_strjoin(g_ms->path[i], "/");
+		free (g_ms->path[i]);
 		g_ms->path[i] = step;
 	}
 }

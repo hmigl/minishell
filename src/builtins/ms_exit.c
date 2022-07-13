@@ -5,6 +5,8 @@ static int	is_invalid_arg(char *n);
 
 void	ms_exit(char **argv)
 {
+	int error;
+
 	printf("exit\n");
 	if (argv[1] != NULL)
 	{
@@ -15,12 +17,14 @@ void	ms_exit(char **argv)
 			return ;
 		}
 	}
+	error = g_ms->exit_code;
 	if (argv[1])
 	{
 		//ms_global_cleanup();
 		exit(setup_n(argv[1]));
 	}
-	exit(g_ms->exit_code);
+	free_all_struct (1);
+	exit(error);
 }
 
 static int	setup_n(char *argv)

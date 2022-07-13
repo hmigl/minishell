@@ -12,7 +12,7 @@ static void ft_open_in (char *str, char *prompt_line)
 			printf ("nao tem acesso\n");
 			return ;
 		}
-		g_ms->cmd_node[g_ms->count]->fd_in = open (file_name, O_RDONLY);
+		g_ms->cmd_node[g_ms->count].fd_in = open (file_name, O_RDONLY);
 	}
 	else
 		printf ("arquivo não existe\n");
