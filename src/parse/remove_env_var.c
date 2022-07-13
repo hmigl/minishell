@@ -10,11 +10,10 @@ static char **ft_alloc_memory (char **split, char **argv)
 		i++;
 	while (argv[alloc])
 		alloc++;
-	split = ft_calloc (alloc + 1- i, sizeof(char));
+	split = ft_calloc (alloc + 1 - i, sizeof(char *));
 	return (split);
 
 }
-
 
 char **ft_remove_var_atrib_and_equals (char **argv)
 {

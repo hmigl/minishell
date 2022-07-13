@@ -25,8 +25,6 @@ static int	ft_check_access(t_cmd *cmd)
 
 static void ft_exec_cmd (t_cmd *cmd)
 {
-	if (g_ms->cmd_node[g_ms->n_pipe - g_ms->count]->fd_in)
-		close (g_ms->cmd_node[g_ms->n_pipe - g_ms->count]->fd_in);
 	execve (cmd->cmd_path, cmd->argv, g_ms->path);
 }
 

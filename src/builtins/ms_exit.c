@@ -6,11 +6,14 @@ static int	is_invalid_arg(char *n);
 void	ms_exit(char **argv)
 {
 	printf("exit\n");
-	if (argv[2] != NULL)
+	if (argv[1] != NULL)
 	{
-		ms_display_error("exit: ", "too many arguments", 0);
-		g_ms->exit_code = 1;
-		return ;
+		if (argv[2] != NULL)
+		{
+			ms_display_error("exit: ", "too many arguments", 0);
+			g_ms->exit_code = 1;
+			return ;
+		}
 	}
 	if (argv[1])
 	{

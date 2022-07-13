@@ -5,10 +5,8 @@ static void ft_alloc_in_cmd_node (char **str)
 	int i;
 
 	i = -1;
-
 	while (str[++i])
-		g_ms->cmd_node[i]->not_parsed = str[i];
-	g_ms->cmd_node[i]->not_parsed = str[i];
+		g_ms->cmd_node[i]->not_parsed = ft_strdup(str[i]);
 }
 
 static char **ft_split_unpipe (char *prompt_line)
@@ -42,6 +40,7 @@ void	ft_unpipe_and_alloc (char *prompt_line)
 	ft_count_pipes (prompt_line);
 	str = ft_split_unpipe (prompt_line);
 	ft_alloc_in_cmd_node (str);
+	ft_free_double_pointer (str);
 
 }
 

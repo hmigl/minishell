@@ -26,7 +26,6 @@ void	ft_process_cmds (void)
 	old_out = dup(STDOUT_FILENO);
 	while (g_ms->count--)
 	{
-
 		ft_open_pipe (g_ms->cmd_node[i]);
 		if (is_builtin (g_ms->cmd_node[i]))
 			exec_builtin(g_ms->cmd_node[i]);

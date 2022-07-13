@@ -35,7 +35,7 @@ void ft_parse (void)
 	g_ms->count = 0;
 	i = 0;
 	g_ms->n_cmd = g_ms->n_pipe + 1;
-	while (g_ms->cmd_node[i]->not_parsed)
+	while (g_ms->n_cmd > i)
 	{
 		g_ms->cmd_node[i]->not_parsed = ft_redirect(g_ms->cmd_node[i]->not_parsed);
 		//chechar se tem erro no redirect (variavel :g_ms->cmd_node[i]->error)
