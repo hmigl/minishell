@@ -8,6 +8,7 @@ LIBFT := $(LIBFTDIR)/libft.a
 CFLAGS += $(INCLUDE) -Wall -Wextra -g3
 LDLIBS += -lreadline -lft
 LDFLAGS += -L$(LIBFTDIR)
+VALFLAGS = --suppressions=readline.supp --leak-check=full --show-leak-kinds=all
 INCLUDE = -Iinclude -I$(LIBFTDIR)
 CC = gcc
 
@@ -70,5 +71,8 @@ fclean: clean
 	$(RM) $(NAME)
 
 re: fclean all
+
+val: re
+	valgrind $(VALFLAGS) ./$(NAME)
 
 .PHONY: all clean
