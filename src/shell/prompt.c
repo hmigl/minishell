@@ -39,7 +39,7 @@ char	*ft_prompt(void)
 	if (!str[0])
 	{
 		free(str);
-		ft_prompt();
+		str = ft_prompt();
 	}
 	return (str);
 }

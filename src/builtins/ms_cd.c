@@ -3,17 +3,16 @@
 static void	act_according_to_status(int status, char *dir);
 static void	update_pwd(char *oldpwd);
 static void	cd_failed(char *dir);
-//free nas strdup é necessário !!!!!!!!!!!
+
 void	ms_cd(char **argv)
 {
-	char	*dir;
 	char	*oldpwd;
 	char	*hold_home_value;
 	int		operation_status;
 
 	operation_status = 0;
 	oldpwd = getcwd(NULL, 0);
-	if (argv[2] != NULL)
+	if (argv[1] && argv[2] != NULL)
 	{
 		ms_display_error("cd: ", "too many arguments", 0);
 		g_ms->exit_code = 1;
