@@ -45,13 +45,14 @@ static void ft_copy_argv (char *rtn, char *argv)
 	return ;
 }
 
-char *ft_remove_quote_from_str (char *argv)
+char *ft_remove_quote_from_str(char *argv)
 {
-	char *rtn;
+	char	*rtn;
 
-	rtn = ft_alloc_mem (rtn, argv);
-	ft_copy_argv (rtn, argv);
-	free (argv);
+	rtn = NULL;
+	rtn = ft_alloc_mem(rtn, argv);
+	ft_copy_argv(rtn, argv);
+	free(argv);
 	return (rtn);
 }
 

@@ -16,7 +16,7 @@ void	ft_alloc_cmd(char *str)
 		i++;
 	}
 	i = 0;
-	g_ms->cmd_node = ft_calloc(alloc_cmd, sizeof(t_cmd )); // review
+	g_ms->cmd_node = ft_calloc(alloc_cmd, sizeof(t_cmd));
 	return ;
 }
 
@@ -29,19 +29,21 @@ void	ft_save_history(char *prompt_line)
 
 char	*ft_prompt(void)
 {
-	char	*str;
-	char	*cwd;
+	char	*buffer;
 
-	cwd = getcwd(NULL, 0);
-	printf("%s", cwd);
-	str = readline("/Minishell> ");
-	free(cwd);
-	if (!str[0])
+	buffer = readline("/Minishell> ");
+	if (buffer == NULL)
 	{
-		free(str);
-		str = ft_prompt();
+		ft_putendl_fd("exit", STDERR_FILENO);
+		free_all_struct(1);
+		rl_clear_history();
+		exit(0);
 	}
-	return (str);
+	if (!buffer[0])
+	{
+		free(buffer);
+		buffer = ft_prompt();
+	}
+	ft_save_history(buffer);
+	return (buffer);
 }
-
-

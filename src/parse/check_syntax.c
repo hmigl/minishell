@@ -72,6 +72,7 @@ static int ft_check_after_pipe (char *str)
 	}
 	return (-1);
 }
+
 static int	ft_check_after_redirect(char *str, char redirect)
 {
 	if (redirect == '>')
@@ -82,26 +83,33 @@ static int	ft_check_after_redirect(char *str, char redirect)
 
 int	ft_check_syntax(char *prompt_line)
 {
-	int i;
-	int error;
-	i = -1;
+	int	i;
+	int	error;
 
+	i = -1;
 	while (prompt_line[++i])
 	{
 		if (prompt_line[i] == '\'' || prompt_line[i] == '\"' )
+		{
+			if (ft_next_occurrence(&prompt_line[i], prompt_line[i]) == -1)
+			{
+				ms_display_error("quote>: ", "command not found", 0);
+				return (1);
+			}
 			i += ft_next_occurrence (&prompt_line[i], prompt_line[i]);
+		}
 		else if (prompt_line[i] == '\\')
 		{
-			printf ("error \\\n"); // ms_display_error()
+			ms_display_error("backslash>: ", "command not found", 0);
 			g_ms->exit_code = 2;
 			return (1);
 		}
 		else if (prompt_line[i] == '|')
 		{
-			error = ft_check_after_pipe (&prompt_line[i]);
+			error = ft_check_after_pipe(&prompt_line[i]);
 			if (error == -1)
 			{
-				printf ("error redirect\n");
+				ms_display_error("syntax error ", "near unexpected token", 0);
 				g_ms->exit_code = 2;
 				return (1);
 			}
@@ -109,10 +117,10 @@ int	ft_check_syntax(char *prompt_line)
 		}
 		else if (prompt_line[i] == '>' || prompt_line[i] == '<')
 		{
-			error = ft_check_after_redirect (&prompt_line[i], prompt_line[i]);
+			error = ft_check_after_redirect(&prompt_line[i], prompt_line[i]);
 			if (error == -1)
 			{
-				printf ("error redirect\n");
+				ms_display_error("syntax error ", "near unexpected token", 0);
 				g_ms->exit_code = 2;
 				return (1);
 			}

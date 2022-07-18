@@ -44,7 +44,7 @@ static void	free_cmd_nodes(void)
 	int	i;
 
 	i = 0;
-	while (g_ms->n_pipe >= i)
+	while (g_ms->n_pipe > i + 1)
 	{
 		ft_free_double_pointer(g_ms->cmd_node[i].argv);
 		ft_free(g_ms->cmd_node[i].cmd_path);
