@@ -4,22 +4,21 @@ t_minishell	*g_ms;
 
 static void	repl(void)
 {
-	char	*prompt_line;
+	char	*input;
 
 	while (1)
 	{
 		stdin_sig();
 		g_ms->n_pipe = 0;
 		g_ms->n_cmd = 0;
-		prompt_line = ft_prompt();
-		ft_save_history(prompt_line);
-		if (ft_check_syntax(prompt_line))
+		input = ft_prompt();
+		if (ft_check_syntax(input))
 		{
-			free(prompt_line);
+			free(input);
 			continue ;
 		}
-		ft_alloc_cmd(prompt_line);
-		ft_unpipe_and_alloc(prompt_line);
+		ft_alloc_cmd(input);
+		ft_unpipe_and_alloc(input);
 		ft_parse();
 		ft_process_cmds();
 	}
