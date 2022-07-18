@@ -11,7 +11,7 @@ void	exec_builtin(t_cmd *cmd)
 	if (!(ft_strncmp(cmd->argv[0], "pwd", -1)))
 		ms_pwd();
 	if (!(ft_strncmp(cmd->argv[0], "export", -1)))
-		ms_export(cmd->argv[1]);
+		ms_export(cmd->argv);
 	if (!(ft_strncmp(cmd->argv[0], "unset", -1)))
 		ms_unset(cmd->argv[1]);
 	if (!(ft_strncmp(cmd->argv[0], "env", -1)))
