@@ -4,12 +4,10 @@ static void	show_names_n_values(void);
 
 void	ms_export(char *statement)
 {
-	int		i;
 	char	*key;
 	char	*value;
 	char	**splited;
 
-	i = 0;
 	if (!statement)
 	{
 		show_names_n_values();

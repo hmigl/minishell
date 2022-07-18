@@ -19,6 +19,7 @@ static void	intr_sig(int sig)
 
 static void	quit_sig(int sig)
 {
+	(void)sig;
 	ft_putendl_fd("Quit (core dumped)", STDERR_FILENO);
 	g_ms->exit_code = 131;
 }
