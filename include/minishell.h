@@ -1,6 +1,10 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 128
+# endif
+
 # include "libft.h"
 # include <stdio.h>
 # include <unistd.h>
@@ -54,12 +58,13 @@ int		ft_next_occurrence(char *str, char y);
 void	*ft_free_double_pointer(char **pointer);
 void	ft_save_paths(void);
 int		ft_next_occurrence(char *str, char y);
-void	free_all_struct (int exit);
+void	free_all_struct(int exit);
 void	stdin_sig(void);
 void	exec_sig(void);
 char	*ft_prompt(void);
 int		ft_save_history(char *prompt_line);
 void	ft_alloc_cmd(char *str);
+char	*get_next_line(int fd);
 
 // REDIRECT
 char	*ft_redirect(char *prompt_line);
