@@ -20,13 +20,13 @@ static int	ft_check_access(t_cmd *cmd)
 		free (cmd->cmd_path);
 		cmd->cmd_path = NULL;
 	}
-	printf ("%s: command not found\n",cmd->argv[0]); // cmd errors
-	return (1);
+	return (0);
 }
 
 static void ft_exec_cmd (t_cmd *cmd)
 {
-	execve (cmd->cmd_path, cmd->argv, g_ms->path);
+	if (execve (cmd->cmd_path, cmd->argv, g_ms->path))
+		write (2, "Error\n", 7);
 }
 
 static void ft_create_process (t_cmd *cmd)
@@ -48,7 +48,6 @@ static void ft_create_process (t_cmd *cmd)
 
 void ft_check_exec (t_cmd *cmd)
 {
-	if (ft_check_access(cmd))
-		return ;
+	ft_check_access(cmd);
 	ft_create_process (cmd);
 }
