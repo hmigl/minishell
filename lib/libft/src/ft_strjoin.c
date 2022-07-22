@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmigl <hmigl@student.42sp.org.br>          +#+  +:+       +#+        */
+/*   By: phiolive <phiolive@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 14:26:20 by hmigl             #+#    #+#             */
-/*   Updated: 2022/01/06 11:22:57 by hmigl            ###   ########.fr       */
+/*   Updated: 2022/07/21 20:16:57 by phiolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ char	*ft_strjoin(char *s1, char const *s2)
 		new[i] = s1[i];
 		++i;
 	}
-	j = 0;
-	while (s2[j])
+	j = -1;
+	if (s2)
 	{
-		new[i + j] = s2[j];
-		++j;
+		while (s2[++j])
+			new[i + j] = s2[j];
 	}
 	new[i + j] = '\0';
 	return (new);

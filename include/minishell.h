@@ -11,6 +11,7 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <signal.h>
+# include <sys/stat.h>
 
 typedef struct s_var		t_var;
 typedef struct s_minishell	t_minishell;
@@ -57,7 +58,7 @@ void	free_all_struct (int exit);
 void	stdin_sig(void);
 void	exec_sig(void);
 char	*ft_prompt(void);
-void	ft_save_history(char *prompt_line);
+int		ft_save_history(char *prompt_line);
 void	ft_alloc_cmd(char *str);
 
 // REDIRECT

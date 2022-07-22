@@ -20,11 +20,28 @@ void	ft_alloc_cmd(char *str)
 	return ;
 }
 
-void	ft_save_history(char *prompt_line)
+int	ft_save_history(char *prompt_line)
 {
-	if (*prompt_line)
+	int i;
+	int only_space;
+
+	i = -1;
+	only_space = 1;
+
+	while (prompt_line[++i])
+	{
+		if (prompt_line[i] != ' ')
+		{
+			only_space--;
+			break;
+		}
+	}
+	if (!only_space)
+	{
 		add_history(prompt_line);
-	return ;
+		return (1);
+	}
+	return (0);
 }
 
 char	*ft_prompt(void)
@@ -44,6 +61,10 @@ char	*ft_prompt(void)
 		free(buffer);
 		buffer = ft_prompt();
 	}
-	ft_save_history(buffer);
+	if (!ft_save_history(buffer))
+	{
+		free (buffer);
+		return (NULL);
+	}
 	return (buffer);
 }
