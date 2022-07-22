@@ -20,7 +20,6 @@ void	ft_process_cmds (void)
 	int old_in;
 	int old_out;
 
-	g_ms->n_cmd = 0;
 	i = 0;
 	old_in = dup(STDIN_FILENO);
 	old_out = dup(STDOUT_FILENO);

@@ -20,6 +20,9 @@ static void	repl(void)
 		ft_alloc_cmd(input);
 		ft_unpipe_and_alloc(input);
 		ft_parse();
+
+		g_ms->n_cmd = 0;
+		g_ms->total_cmd = g_ms->n_pipe + 1;
 		ft_process_cmds();
 	}
 }

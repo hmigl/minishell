@@ -45,6 +45,7 @@ struct s_minishell {
 	int		n_pipe;
 	int		exit_code;
 	int		n_cmd;
+	int		total_cmd;
 };
 
 //  SUPPORT
