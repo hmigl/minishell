@@ -37,7 +37,7 @@ SRC += is_builtin.c exec_builtin.c ms_echo.c \
 SRC += check_syntax.c convert_chars.c unpipe_and_alloc.c \
 		parse.c remove_env_var.c remove_quotes.c
 
-SRC += start_process.c check_exec.c
+SRC += start_process.c check_exec.c heredoc.c heredoc_signal.c
 
 $(OBJDIR)/%.o: %.c
 	$(COMPILE.c) $(OUTPUT_OPTION) $<

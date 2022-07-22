@@ -61,6 +61,7 @@ int		ft_next_occurrence(char *str, char y);
 void	free_all_struct(int exit);
 void	stdin_sig(void);
 void	exec_sig(void);
+void	heredoc_stdin_sig(void);
 char	*ft_prompt(void);
 int		ft_save_history(char *prompt_line);
 void	ft_alloc_cmd(char *str);
@@ -108,5 +109,6 @@ char	*ft_remove_quote_from_str(char *argv);
 // PROCESS
 void	ft_process_cmds(void);
 void	ft_check_exec(t_cmd *cmd);
+void	exec_heredoc(t_cmd *cmd);
 
 #endif // MINISHELL_H
