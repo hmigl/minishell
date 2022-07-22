@@ -12,9 +12,10 @@ static void	repl(void)
 		g_ms->n_pipe = 0;
 		g_ms->n_cmd = 0;
 		input = ft_prompt();
-		if (ft_check_syntax(input))
+		if (!input || ft_check_syntax(input))
 		{
-			free(input);
+			if (input)
+				free(input);
 			continue ;
 		}
 		ft_alloc_cmd(input);
