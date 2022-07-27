@@ -15,7 +15,7 @@ SRC := ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c ft_isprint.c \
 	ft_strtrim.c ft_substr.c ft_tolower.c ft_toupper.c ft_checks_ext.c \
 	ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c \
 	ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c ft_free_matrix.c \
-	ft_isnumber.c ft_atol.c ft_strcmp.c
+	ft_isnumber.c ft_atol.c ft_strcmp.c ft_isspace.c
 
 OBJ_FILES = $(SRC:c=o)
 OBJ = $(addprefix $(OBJ_DIR)/, $(OBJ_FILES))

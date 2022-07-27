@@ -2,7 +2,7 @@
 
 void	ms_env(void)
 {
-	t_var *anchor;
+	t_var	*anchor;
 
 	anchor = g_ms->env_var;
 	while (anchor)

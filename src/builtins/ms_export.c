@@ -12,11 +12,6 @@ static void	show_names_n_values(void)
 	}
 }
 
-static int	ft_isspace(int c)
-{
-	return (c == ' ' || (c >= '\t' && c <= '\r'));
-}
-
 static	int	is_a_valid_identifier(char *statement)
 {
 	int	i;
@@ -58,11 +53,14 @@ static void	show_invalid_identifier_err(char *invalid_statement)
 	g_ms->exit_code = 1;
 }
 
+static void	uniq_env(char *key)
+{
+	unset_values(key);
+}
+
 void	ms_export(char **argv)
 {
 	int		i;
-	char	*key;
-	char	*value;
 	char	**splited;
 
 	if (!argv)
@@ -79,9 +77,8 @@ void	ms_export(char **argv)
 		else if (is_a_valid_identifier(argv[i]))
 		{
 			splited = ft_split(argv[i], '=');
-			key = splited[0];
-			value = splited[1];
-			add_vars_to_env(key, value, g_ms->env_var);
+			uniq_env(splited[0]);
+			add_vars_to_env(splited[0], splited[1], g_ms->env_var);
 			g_ms->exit_code = 0;
 		}
 	}
