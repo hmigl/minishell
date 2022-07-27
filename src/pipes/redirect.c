@@ -84,12 +84,6 @@ char *ft_file_name (char *prompt_line, char redirect)
 		i++;
 	while (prompt_line[i] == ' ')
 		i++;
-	if (!prompt_line[i] || prompt_line[i] < 33 || prompt_line[i] > 126
-		|| prompt_line[i] == '>' || prompt_line[i] == '<')
-	{
-		printf ("erro redirect");
-		return (NULL);
-	}
 	if (prompt_line[i] == '\"' || prompt_line[i] == '\'')
 		file_name = ft_get_file_name (&prompt_line[i + 1], prompt_line[i]);
 	else
@@ -142,6 +136,8 @@ char *ft_redirect (char *prompt_line)
 		{
 			prompt_line = ft_check_redirect_type (prompt_line , &prompt_line[i], prompt_line[i]);
 			i = -1;
+			if (g_ms->redirect_error)
+				break;
 		}
 	}
 	return (prompt_line);

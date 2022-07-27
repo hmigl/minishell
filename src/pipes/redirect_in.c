@@ -9,13 +9,20 @@ static void ft_open_in (char *str, char *prompt_line)
 	{
 		if (access(file_name, R_OK) < 0)
 		{
-			printf ("nao tem acesso\n");
+
+			ms_display_error(file_name, ": Permission denied", 0);
+			free (file_name);
+			g_ms->redirect_error = 1;
 			return ;
 		}
 		g_ms->cmd_node[g_ms->count].fd_in = open (file_name, O_RDONLY);
 	}
 	else
-		printf ("arquivo não existe\n");
+	{
+		ms_display_error(file_name, ": No such file or directory", 0);
+		g_ms->redirect_error = 1;
+	}
+	free (file_name);
 	return ;
 }
 

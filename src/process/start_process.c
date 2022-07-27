@@ -27,10 +27,13 @@ void	ft_process_cmds (void)
 	while (g_ms->count--)
 	{
 		ft_open_pipe (&g_ms->cmd_node[i]);
-		if (is_builtin (&g_ms->cmd_node[i]))
-			exec_builtin(&g_ms->cmd_node[i]);
-		else
-		 	ft_check_exec (&g_ms->cmd_node[i]);
+		if (g_ms->cmd_node[i].redirect_error == 0)
+		{
+			if (is_builtin (&g_ms->cmd_node[i]))
+				exec_builtin(&g_ms->cmd_node[i]);
+			else
+		 		ft_check_exec (&g_ms->cmd_node[i]);
+		}
 		if (g_ms->n_cmd)
 			close (g_ms->cmd_node[i - 1].pipe[0]);
 		close (g_ms->cmd_node[i].pipe[1]);
