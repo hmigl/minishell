@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-void	ms_unset(char *key)
+void	unset_values(char *key)
 {
 	t_var	*anchor;
 	t_var	*prev;
@@ -21,5 +21,16 @@ void	ms_unset(char *key)
 		prev = anchor;
 		anchor = anchor->next;
 	}
+}
+
+void	ms_unset(char **argv)
+{
+	int		i;
+
+	i = -1;
 	g_ms->exit_code = 0;
+	if (!argv)
+		return ;
+	while (argv[++i] != NULL)
+		unset_values(argv[i]);
 }

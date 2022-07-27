@@ -92,7 +92,8 @@ void	ms_echo(char **argv);
 void	ms_cd(char **argv);
 void	ms_pwd(void);
 void	ms_export(char **argv);
-void	ms_unset(char *key);
+void	ms_unset(char **argv);
+void	unset_values(char *key);
 void	ms_env(void);
 void	ms_exit(char **argv);
 
