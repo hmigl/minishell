@@ -12,11 +12,6 @@ static void	show_names_n_values(void)
 	}
 }
 
-static int	ft_isspace(int c)
-{
-	return (c == ' ' || (c >= '\t' && c <= '\r'));
-}
-
 static	int	is_a_valid_identifier(char *statement)
 {
 	int	i;
