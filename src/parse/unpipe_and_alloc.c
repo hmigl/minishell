@@ -6,7 +6,9 @@ static void ft_alloc_in_cmd_node (char **str)
 
 	i = -1;
 	while (str[++i])
+	{
 		g_ms->cmd_node[i].not_parsed = ft_strdup(str[i]);
+	}
 	return ;
 }
 
@@ -27,10 +29,11 @@ static void ft_count_pipes (char *prompt_line)
 	i = -1;
 	while (prompt_line[++i])
 	{
-		if (prompt_line[i] == '|')
-			g_ms->n_pipe++;
-		else if (prompt_line[i] == '\'' || prompt_line[i] == '\"')
+
+		if (prompt_line[i] == '\'' || prompt_line[i] == '\"')
 			i += (ft_next_occurrence (&prompt_line[i], prompt_line[i]));
+		else if (prompt_line[i] == '|')
+			g_ms->n_pipe++;
 	}
 	return ;
 }

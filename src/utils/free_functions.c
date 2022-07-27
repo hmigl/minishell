@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-static void	*ft_free(void *pointer)
+void	*ft_free(void *pointer)
 {
 	if (pointer)
 		free(pointer);
@@ -44,7 +44,7 @@ static void	free_cmd_nodes(void)
 	int	i;
 
 	i = 0;
-	while (g_ms->n_pipe > i + 1)
+	while (g_ms->total_cmd > i)
 	{
 		ft_free_double_pointer(g_ms->cmd_node[i].argv);
 		ft_free(g_ms->cmd_node[i].cmd_path);

@@ -9,7 +9,9 @@ static void ft_open_out (char *str, char *prompt_line, int t)
 	{
 		if (access(file_name, W_OK) < 0)
 		{
-			printf ("nao pode escrever\n");
+			ms_display_error(file_name, ": Permission denied", 0);
+			free (file_name);
+			g_ms->redirect_error = 1;
 			return ;
 		}
 		if (t == 1)
@@ -19,6 +21,7 @@ static void ft_open_out (char *str, char *prompt_line, int t)
 	}
 	else
 		g_ms->cmd_node[g_ms->count].fd_out =  open (file_name, O_RDWR | O_CREAT | O_APPEND, 0644);
+	free (file_name);
 	return ;
 }
 
