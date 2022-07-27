@@ -12,11 +12,6 @@
 
 #include "../libft.h"
 
-static int	ft_isspace(int c)
-{
-	return (c == ' ' || (c >= '\t' && c <= '\r'));
-}
-
 long long int	ft_atol(const char *nptr)
 {
 	long long int	res;

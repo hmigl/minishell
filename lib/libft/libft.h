@@ -23,6 +23,7 @@ int			ft_isdigit(int c);
 int			ft_isprint(int c);
 int			ft_tolower(int c);
 int			ft_toupper(int c);
+int			ft_isspace(int c);
 int			ft_isnumber(char *number);
 
 void		ft_bzero(void *s, size_t n);
