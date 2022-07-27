@@ -44,12 +44,14 @@ static void	show_invalid_identifier_err(char *invalid_statement)
 {
 	int		value_len;
 	char	*err;
+	char	*buffer;
 
 	value_len = ft_strlen(invalid_statement);
 	err = ft_substr(invalid_statement, 0, value_len);
-	ms_display_error("export: ", ft_strjoin(err, ": not a valid identifier"),
-		0);
+	buffer = ft_strjoin(err, ": not a valid identifier");
+	ms_display_error("export: ", buffer, 0);
 	free(err);
+	free(buffer);
 	g_ms->exit_code = 1;
 }
 
