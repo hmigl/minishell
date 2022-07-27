@@ -20,6 +20,7 @@ static void	repl(void)
 		}
 		ft_alloc_cmd(input);
 		ft_unpipe_and_alloc(input);
+		g_ms->total_cmd = g_ms->n_pipe + 1;
 		ft_parse();
 		ft_process_cmds();
 	}
@@ -43,3 +44,10 @@ int	main(int argc, char *argv[], char *envp[])
 	repl();
 	return (0);
 }
+
+
+// preciso colocar os erros dentro da estrutura e parar de executar os comandos caso tenha erro de permissão !
+// integrar heredoc
+// TESTES
+// as <1212 (fica em loop infinito, checar)
+// parse de apenas redirect da segfault

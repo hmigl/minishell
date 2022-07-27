@@ -34,6 +34,7 @@ struct s_cmd {
 	char	**argv;
 	char	*cmd_path;
 	char	*not_parsed;
+	int		redirect_error;
 	int		pipe[2];
 	int		fd_in;
 	int		fd_out;
@@ -44,6 +45,8 @@ struct s_minishell {
 	t_var	*env_var;
 	t_var	*local_var;
 	t_cmd	*cmd_node;
+	int		total_cmd;
+	int		redirect_error;
 	char	**path;
 	int		count;
 	int		pipe[2];
@@ -54,6 +57,7 @@ struct s_minishell {
 
 //  SUPPORT
 void	ms_display_error(char *id, char *err, int should_quit);
+void	ms_display_error_execve(char *id, char *err, int should_quit);
 int		ft_next_occurrence(char *str, char y);
 void	*ft_free_double_pointer(char **pointer);
 void	ft_save_paths(void);
@@ -66,6 +70,7 @@ char	*ft_prompt(void);
 int		ft_save_history(char *prompt_line);
 void	ft_alloc_cmd(char *str);
 char	*get_next_line(int fd);
+void	*ft_free(void *pointer);
 
 // REDIRECT
 char	*ft_redirect(char *prompt_line);
