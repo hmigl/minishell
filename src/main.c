@@ -46,8 +46,6 @@ int	main(int argc, char *argv[], char *envp[])
 }
 
 
-// preciso colocar os erros dentro da estrutura e parar de executar os comandos caso tenha erro de permissão !
+
 // integrar heredoc
 // TESTES
-// as <1212 (fica em loop infinito, checar)
-// parse de apenas redirect da segfault

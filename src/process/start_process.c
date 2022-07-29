@@ -27,7 +27,7 @@ void	ft_process_cmds (void)
 	while (g_ms->count--)
 	{
 		ft_open_pipe (&g_ms->cmd_node[i]);
-		if (g_ms->cmd_node[i].redirect_error == 0)
+		if (g_ms->cmd_node[i].redirect_error == 0 && !only_space(&g_ms->cmd_node[i]))
 		{
 			if (is_builtin (&g_ms->cmd_node[i]))
 				exec_builtin(&g_ms->cmd_node[i]);

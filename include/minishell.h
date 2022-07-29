@@ -72,6 +72,7 @@ void	ft_alloc_cmd(char *str);
 char	*get_next_line(int fd);
 void	*ft_free(void *pointer);
 int		is_not_spc_quote_dollar(char c);
+int		only_space(t_cmd *cmd);
 
 // REDIRECT
 char	*ft_redirect(char *prompt_line);
