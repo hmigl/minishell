@@ -58,8 +58,8 @@ static void ft_save_var_in_correct_struct (char **argv, int has_only_var)
 			g_ms->env_var = add_vars_to_env(split[0], split[1], g_ms->env_var);
 		else
 			g_ms->local_var = add_vars_to_env(split[0], split[1], g_ms->local_var);
+		ft_free_double_pointer (split);
 	}
-
 }
 
 char **ft_save_env_vars (t_cmd *cmd)

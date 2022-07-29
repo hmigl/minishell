@@ -15,7 +15,7 @@ void	ms_echo(char **argv)
 	while (argv && argv[i])
 	{
 		printf("%s", argv[i]);
-		if (argv[i + 1])
+		if (argv[i + 1] && argv[i][0])
 			printf(" ");
 		++i;
 	}
