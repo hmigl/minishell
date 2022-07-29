@@ -71,6 +71,7 @@ int		ft_save_history(char *prompt_line);
 void	ft_alloc_cmd(char *str);
 char	*get_next_line(int fd);
 void	*ft_free(void *pointer);
+int		is_not_spc_quote_dollar(char c);
 
 // REDIRECT
 char	*ft_redirect(char *prompt_line);
@@ -85,6 +86,7 @@ t_var	*add_vars_to_env(char *key, char *value, t_var *var_struct);
 void	rm_single_node(t_var *node);
 char	**ft_save_env_vars(t_cmd *cmd);
 int		ft_have_a_var_to_save(char *str);
+char	*ft_expand_exit_error (char *cmd);
 
 // EXPANSION
 char	*ft_expand_env_var(char *cmd);

@@ -12,3 +12,9 @@ int	ft_next_occurrence (char *str, char y)
 	}
 	return (-1);
 }
+
+int	is_not_spc_quote_dollar(char c)
+{
+	return (c != ' ' && c != '\'' && c != '\"' && c != '$');
+}
+

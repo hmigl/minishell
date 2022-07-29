@@ -1,10 +1,5 @@
 #include "minishell.h"
 
-static int	is_not_spc_quote_dollar(char c)
-{
-	return (c != ' ' && c != '\'' && c != '\"' && c != '$');
-}
-
 static char	*ft_convert(char *content, char *key, char *cmd)
 {
 	int		i;
@@ -38,6 +33,21 @@ static char	*ft_convert(char *content, char *key, char *cmd)
 	return (convert);
 }
 
+
+char *ft_expand_exit_error (char *cmd)
+{
+	char *key;
+	char *value;
+	char *rtn;
+
+	key = ft_strdup ("?");
+	value = ft_itoa (g_ms->exit_code);
+	rtn = ft_convert(value, key, cmd);
+	ft_free(key);
+	ft_free(value);
+	return (rtn);
+}
+
 static char	*ft_cannot_find(char *var, char *cmd)
 {
 	int		i;
@@ -69,6 +79,8 @@ char	*ft_find(char *var, char *cmd)
 
 	anchor = g_ms->env_var;
 	i = 1;
+	if (var[i] == '?')
+		return (ft_expand_exit_error (cmd));
 	while (var[i] && is_not_spc_quote_dollar(var[i]))
 		i++;
 	while (anchor)

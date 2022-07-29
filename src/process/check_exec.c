@@ -73,6 +73,8 @@ static void ft_create_process (t_cmd *cmd)
 
 void ft_check_exec (t_cmd *cmd)
 {
+	if (cmd->argv[0] == 0)
+		return ;
 	if (!ft_check_access(cmd))
 		ft_create_process (cmd);
 	else
