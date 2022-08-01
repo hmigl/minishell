@@ -1,5 +1,51 @@
 #include "minishell.h"
 
+static void	show_names_n_values(void);
+static void	show_invalid_identifier_err(char *invalid_statement);
+static	int	is_a_valid_identifier(char *statement);
+static void	uniq_env(char *key);
+
+void	ms_export(char **argv)
+{
+	int		i;
+	char	**splited;
+
+	if (argv[1] == NULL)
+	{
+		show_names_n_values();
+		g_ms->exit_code = 0;
+		return ;
+	}
+	i = 0;
+	while (argv[++i] != NULL)
+	{
+		if (argv[i][0] == '=')
+			show_invalid_identifier_err(argv[i]);
+		else if (is_a_valid_identifier(argv[i]))
+		{
+			splited = ft_split(argv[i], '=');
+			uniq_env(splited[0]);
+			add_vars_to_env(splited[0], splited[1], g_ms->env_var);
+			g_ms->exit_code = 0;
+		}
+	}
+}
+
+static void	show_invalid_identifier_err(char *invalid_statement)
+{
+	int		value_len;
+	char	*err;
+	char	*buffer;
+
+	value_len = ft_strlen(invalid_statement);
+	err = ft_substr(invalid_statement, 0, value_len);
+	buffer = ft_strjoin(err, ": not a valid identifier");
+	ms_display_error("export: ", buffer, 0);
+	free(err);
+	free(buffer);
+	g_ms->exit_code = 1;
+}
+
 static void	show_names_n_values(void)
 {
 	t_var	*anchor;
@@ -40,48 +86,7 @@ static	int	is_a_valid_identifier(char *statement)
 	return (1);
 }
 
-static void	show_invalid_identifier_err(char *invalid_statement)
-{
-	int		value_len;
-	char	*err;
-	char	*buffer;
-
-	value_len = ft_strlen(invalid_statement);
-	err = ft_substr(invalid_statement, 0, value_len);
-	buffer = ft_strjoin(err, ": not a valid identifier");
-	ms_display_error("export: ", buffer, 0);
-	free(err);
-	free(buffer);
-	g_ms->exit_code = 1;
-}
-
 static void	uniq_env(char *key)
 {
 	unset_values(key);
-}
-
-void	ms_export(char **argv)
-{
-	int		i;
-	char	**splited;
-
-	if (!argv)
-	{
-		show_names_n_values();
-		g_ms->exit_code = 0;
-		return ;
-	}
-	i = 0;
-	while (argv[++i] != NULL)
-	{
-		if (argv[i][0] == '=')
-			show_invalid_identifier_err(argv[i]);
-		else if (is_a_valid_identifier(argv[i]))
-		{
-			splited = ft_split(argv[i], '=');
-			uniq_env(splited[0]);
-			add_vars_to_env(splited[0], splited[1], g_ms->env_var);
-			g_ms->exit_code = 0;
-		}
-	}
 }
