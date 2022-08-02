@@ -26,6 +26,7 @@ void	ms_export(char **argv)
 			splited = ft_split(argv[i], '=');
 			uniq_env(splited[0]);
 			add_vars_to_env(splited[0], splited[1], g_ms->env_var);
+			ft_free_double_pointer(splited);
 			g_ms->exit_code = 0;
 		}
 	}
