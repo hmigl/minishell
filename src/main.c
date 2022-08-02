@@ -11,6 +11,7 @@ static void	repl(void)
 		stdin_sig();
 		g_ms->n_pipe = 0;
 		g_ms->n_cmd = 0;
+		g_ms->total_cmd = 0;
 		input = ft_prompt();
 		if (!input || ft_check_syntax(input))
 		{
