@@ -91,27 +91,27 @@ char *ft_file_name (char *prompt_line, char redirect)
 	return (file_name);
 }
 
-static int ft_check_quotes (char *prompt_line)
-{
-	int i;
-	int error;
+// static int ft_check_quotes (char *prompt_line)
+// {
+// 	int i;
+// 	int error;
 
-	i = -1;
-	while (prompt_line[++i])
-	{
-		if (prompt_line[i] == '\'' || prompt_line[i] == '\"')
-		{
-			error = ft_next_occurrence (&prompt_line[i], prompt_line[i]);
-			if (error == -1)
-			{
-				printf ("Quote Error\n");
-				return (1);
-			}
-			i += error;
-		}
-	}
-	return (0) ;
-}
+// 	i = -1;
+// 	while (prompt_line[++i])
+// 	{
+// 		if (prompt_line[i] == '\'' || prompt_line[i] == '\"')
+// 		{
+// 			error = ft_next_occurrence (&prompt_line[i], prompt_line[i]);
+// 			if (error == -1)
+// 			{
+// 				printf ("Quote Error\n");
+// 				return (1);
+// 			}
+// 			i += error;
+// 		}
+// 	}
+// 	return (0) ;
+// }
 
 static char* ft_check_redirect_type (char *str, char *prompt_line, char redirect)
 {

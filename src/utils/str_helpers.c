@@ -25,6 +25,8 @@ int	only_space(t_cmd *cmd)
 
 	i = -1;
 	j = -1;
+	if (!cmd->argv)
+		return (1);
 	while (cmd->argv[++i])
 	{
 		while (cmd->argv[i][++j])
