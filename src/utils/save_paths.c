@@ -21,7 +21,11 @@ void ft_save_paths (void)
 
 	anchor = g_ms->env_var;
 	while (ft_strncmp (anchor->key, "PATH", -1))
+	{
 		anchor = anchor->next;
+		if (!anchor)
+			return ;
+	}
 	g_ms->path = ft_split (anchor->value, ':');
 	ft_add_slash ();
 	return ;

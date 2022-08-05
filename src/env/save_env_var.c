@@ -66,6 +66,9 @@ char **ft_save_env_vars (t_cmd *cmd)
 {
 	int vars;
 	char **rtn;
+
+	if (!cmd->argv)
+		return (NULL);
 	vars = ft_is_local_var(cmd->argv);
 	if (vars == -1)
 		return (cmd->argv) ;

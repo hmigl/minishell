@@ -14,6 +14,7 @@ static int ft_absoluth_path_check (t_cmd *cmd)
 	return (1);
 
 }
+
 static int	ft_check_access(t_cmd *cmd)
 {
 	int	i;
@@ -25,6 +26,8 @@ static int	ft_check_access(t_cmd *cmd)
 	if (!ft_absoluth_path_check(cmd))
 		return (0);
 	ft_save_paths ();
+	if (!g_ms->path)
+		return (1);
 	while (g_ms->path[++i])
 	{
 		cmd->cmd_path = ft_strjoin(g_ms->path[i], cmd->argv[0]);
@@ -33,13 +36,11 @@ static int	ft_check_access(t_cmd *cmd)
 			free (cmd->cmd_path);
 			cmd->cmd_path = NULL;
 			continue;
-
 		}
 		if ((type.st_mode & S_IXUSR))
 			return (0);
 		free (cmd->cmd_path);
 		cmd->cmd_path = NULL;
-
 	}
 	return (1);
 }

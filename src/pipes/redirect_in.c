@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-static void ft_open_in (char *str, char *prompt_line)
+static void ft_open_in (char *prompt_line)
 {
 	char	*file_name;
 
@@ -33,6 +33,6 @@ char	*ft_in_redirect (char *str, char *prompt_line)
 	i = 0;
 	while (prompt_line[i] && prompt_line[i] == '<')
 		i++;
-	ft_open_in (str, prompt_line);
+	ft_open_in (prompt_line);
 	return (ft_trim_redirect (str));
 }
