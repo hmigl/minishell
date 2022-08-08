@@ -119,5 +119,6 @@ char	*ft_remove_quote_from_str(char *argv);
 void	ft_process_cmds(void);
 void	ft_check_exec(t_cmd *cmd);
 void	exec_heredoc(t_cmd *cmd);
+char	**get_envp(void);
 
 #endif // MINISHELL_H

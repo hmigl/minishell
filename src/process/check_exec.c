@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-static int ft_absoluth_path_check (t_cmd *cmd)
+static int ft_absoluth_path_check(t_cmd *cmd)
 {
 	struct stat	type;
 
@@ -45,22 +45,27 @@ static int	ft_check_access(t_cmd *cmd)
 	return (1);
 }
 
-static void ft_exec_cmd (t_cmd *cmd)
+static void ft_exec_cmd(t_cmd *cmd)
 {
-	if (execve (cmd->cmd_path, cmd->argv, g_ms->path))
-	{
-		write (2, "Error at execve\n", 17);
-		free_all_struct (0);
-	}
-	return ;
+	char	**envp;
+	int		exit_code;
+
+	envp = get_envp();
+	exit_code = execve(cmd->cmd_path, cmd->argv, envp);
+	write (2, "Error at execve\n", 17);
+	free_all_struct(1);
+	rl_clear_history();
+	ft_free_double_pointer(envp);
+	exit(exit_code);
 }
 
-static void ft_create_process (t_cmd *cmd)
+static void ft_create_process(t_cmd *cmd)
 {
 	int	pid;
 	int	wstatus;
 
-	pid = fork ();
+	wstatus = 0;
+	pid = fork();
 	exec_sig();
 	if (pid == -1)
 		printf ("Error: cannot fork the process\n");
@@ -70,6 +75,7 @@ static void ft_create_process (t_cmd *cmd)
 		waitpid(pid, &wstatus, 0);
 	if (g_ms->cmd_node[g_ms->n_pipe - g_ms->count].fd_out)
 		close (g_ms->cmd_node[g_ms->n_pipe - g_ms->count].fd_out);
+	g_ms->exit_code = (wstatus >> 8);
 }
 
 void ft_check_exec (t_cmd *cmd)
