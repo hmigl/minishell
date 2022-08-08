@@ -75,6 +75,7 @@ static void ft_create_process(t_cmd *cmd)
 		waitpid(pid, &wstatus, 0);
 	if (g_ms->cmd_node[g_ms->n_pipe - g_ms->count].fd_out)
 		close (g_ms->cmd_node[g_ms->n_pipe - g_ms->count].fd_out);
+	g_ms->exit_code = (wstatus >> 8);
 }
 
 void ft_check_exec (t_cmd *cmd)
