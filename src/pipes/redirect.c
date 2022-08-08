@@ -73,7 +73,6 @@ static char *ft_get_file_name (char *prompt_line, char quote)
 	return (file_name);
 }
 
-
 char *ft_file_name (char *prompt_line, char redirect)
 {
 	char *file_name;
@@ -90,28 +89,6 @@ char *ft_file_name (char *prompt_line, char redirect)
 		file_name = ft_get_file_name (&prompt_line[i], 0);
 	return (file_name);
 }
-
-// static int ft_check_quotes (char *prompt_line)
-// {
-// 	int i;
-// 	int error;
-
-// 	i = -1;
-// 	while (prompt_line[++i])
-// 	{
-// 		if (prompt_line[i] == '\'' || prompt_line[i] == '\"')
-// 		{
-// 			error = ft_next_occurrence (&prompt_line[i], prompt_line[i]);
-// 			if (error == -1)
-// 			{
-// 				printf ("Quote Error\n");
-// 				return (1);
-// 			}
-// 			i += error;
-// 		}
-// 	}
-// 	return (0) ;
-// }
 
 static char* ft_check_redirect_type (char *str, char *prompt_line, char redirect)
 {

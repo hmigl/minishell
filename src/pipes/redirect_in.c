@@ -33,6 +33,9 @@ char	*ft_in_redirect (char *str, char *prompt_line)
 	i = 0;
 	while (prompt_line[i] && prompt_line[i] == '<')
 		i++;
-	ft_open_in (prompt_line);
+	if (i == 1)
+		ft_open_in (prompt_line);
+	else
+		exec_heredoc (&prompt_line[i]);
 	return (ft_trim_redirect (str));
 }
