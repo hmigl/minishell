@@ -8,7 +8,7 @@ static void write_heredoc_lines(char *heredoc_line, char *delimiter, int *fd)
 	{
 		write(STDIN_FILENO, "heredoc> ", 9);
 		write(fd[1], heredoc_line, ft_strlen(heredoc_line));
-		free(heredoc_line);
+		ft_free(heredoc_line);
 		heredoc_line = get_next_line(STDIN_FILENO);
 		if (heredoc_line == NULL)
 		{
@@ -18,6 +18,7 @@ static void write_heredoc_lines(char *heredoc_line, char *delimiter, int *fd)
 			free(err);
 		}
 	}
+	ft_free (heredoc_line);
 }
 
 static char * ft_found_delimiter (char *str)
