@@ -14,7 +14,7 @@ static void ft_trim_redirect_cpy (char *str, char *rtn)
 	while (str[i] == ' ')
 		i++;
 	if (str[i] == '\"' || str[i] == '\'')
-		i += ft_next_occurrence (&str[i], str[i]);
+		i += ft_next_occurrence (&str[i], str[i]) + 1;
 	else
 	{
 		while (str[i] != ' ' && str[i])
@@ -41,13 +41,16 @@ char *ft_trim_redirect (char *str)
 	while (str[i + trim] == ' ')
 		trim++;
 	if (str[i + trim] == '\"' || str[i + trim] == '\'')
-		trim += ft_next_occurrence (&str[i + trim], str[i + trim]);
+		trim += ft_next_occurrence (&str[i + trim], str[i + trim]) + 1;
 	else
 	{
 		while (str[i + trim] != ' ' && str[i + trim])
 			trim++;
 	}
-	rtn = ft_calloc (ft_strlen(str) - trim + 1, sizeof(char));
+	int k = ft_strlen(str) - trim + 1;
+	int size = ft_strlen(str);
+	rtn = ft_calloc (k , size - size + 1);
+	// rtn = ft_calloc (ft_strlen(str) - trim + 1, sizeof(char));
 	ft_trim_redirect_cpy (str, rtn);
 	return (rtn);
 }
