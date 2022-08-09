@@ -75,6 +75,7 @@ int		is_not_spc_quote_dollar(char c);
 int		only_space(t_cmd *cmd);
 
 // REDIRECT
+void	exec_heredoc(char *delimiter);
 char	*ft_redirect(char *prompt_line);
 char	*ft_out_redirect(char *str, char *prompt_line);
 char	*ft_in_redirect(char *str, char *prompt_line);
@@ -118,7 +119,6 @@ char	*ft_remove_quote_from_str(char *argv);
 // PROCESS
 void	ft_process_cmds(void);
 void	ft_check_exec(t_cmd *cmd);
-void	exec_heredoc(t_cmd *cmd);
 char	**get_envp(void);
 
 #endif // MINISHELL_H

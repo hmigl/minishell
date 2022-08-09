@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-static void ft_open_in (char *prompt_line)
+static void	ft_open_in(char *prompt_line)
 {
 	char	*file_name;
 
@@ -9,7 +9,6 @@ static void ft_open_in (char *prompt_line)
 	{
 		if (access(file_name, R_OK) < 0)
 		{
-
 			ms_display_error(file_name, ": Permission denied", 0);
 			free (file_name);
 			g_ms->redirect_error = 1;
@@ -26,13 +25,20 @@ static void ft_open_in (char *prompt_line)
 	return ;
 }
 
-char	*ft_in_redirect (char *str, char *prompt_line)
+char	*ft_in_redirect(char *str, char *prompt_line)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (prompt_line[i] && prompt_line[i] == '<')
 		i++;
-	ft_open_in (prompt_line);
-	return (ft_trim_redirect (str));
+	if (i == 1)
+		ft_open_in(prompt_line);
+	else
+	{
+		while (ft_isspace(prompt_line[i]))
+			++i;
+		exec_heredoc(&prompt_line[i]);
+	}
+	return (ft_trim_redirect(str));
 }
