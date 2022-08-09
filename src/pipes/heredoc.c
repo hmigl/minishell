@@ -23,6 +23,7 @@ static void	write_heredoc_lines(char *heredoc_line, char *delimiter, int *fd)
 			ft_putchar_fd('\n', STDERR_FILENO);
 			ms_display_error("warning: heredoc ", err, 0);
 			free(err);
+			break ;
 		}
 		else if (delimiter_coincides(heredoc_line, delimiter, fd[1]))
 		{
