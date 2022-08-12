@@ -56,11 +56,6 @@ char	*ft_prompt(void)
 		rl_clear_history();
 		exit(0);
 	}
-	if (!buffer[0])
-	{
-		free(buffer);
-		buffer = ft_prompt();
-	}
 	if (!ft_save_history(buffer))
 	{
 		free (buffer);
