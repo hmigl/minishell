@@ -1,5 +1,32 @@
 #include "minishell.h"
 
+static void ft_copy_paths (char *cwd_path)
+{
+	int i;
+	char **step;
+
+	i = 0;
+	while (g_ms->path[i])
+		i++;
+	step = ft_calloc(i + 2, sizeof(char *));
+	i = -1;
+	while (g_ms->path[++i])
+		step[i] = ft_strdup(g_ms->path[i]);
+	step[i] = cwd_path;
+	ft_free_double_pointer (g_ms->path);
+	g_ms->path = step;
+}
+
+static void ft_save_current_path(void)
+{
+	char *cwd_path;
+
+	cwd_path = NULL;
+	cwd_path = getcwd(cwd_path, 0);
+	ft_copy_paths(cwd_path);
+
+}
+
 
 static void ft_add_slash (void)
 {
@@ -27,6 +54,7 @@ void ft_save_paths (void)
 			return ;
 	}
 	g_ms->path = ft_split (anchor->value, ':');
+	ft_save_current_path();
 	ft_add_slash ();
 	return ;
 }

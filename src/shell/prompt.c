@@ -47,8 +47,15 @@ int	ft_save_history(char *prompt_line)
 char	*ft_prompt(void)
 {
 	char	*buffer;
+	char	*path;
+	char	*minishell_path;
 
-	buffer = readline("/Minishell> ");
+	path = NULL;
+	path = getcwd(path, 0);
+	minishell_path = ft_strjoin (path, "/Minishell>");
+	buffer = readline(minishell_path);
+	ft_free (minishell_path);
+	ft_free (path);
 	if (buffer == NULL)
 	{
 		ft_putendl_fd("exit", STDERR_FILENO);

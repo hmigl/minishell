@@ -1,7 +1,24 @@
 #include "minishell.h"
 
+static void ft_save_standard_exit ()
+{
+	g_ms->std_in = dup(STDIN_FILENO);
+	g_ms->std_out = dup(STDOUT_FILENO);
+	return;
+}
+
+void ft_return_standard_exit (void)
+{
+	dup2 (g_ms->std_out, STDOUT_FILENO);
+	close (g_ms->std_out);
+	dup2 (g_ms->std_in, STDIN_FILENO);
+	close (g_ms->std_in);
+}
+
  void ft_open_pipe (t_cmd *cmd)
 {
+	if (!g_ms->n_pipe)
+		return;
 	if (g_ms->count)
 		pipe (cmd->pipe);
 	if (cmd->fd_in)
@@ -17,13 +34,9 @@
 void	ft_process_cmds (void)
 {
 	int i;
-	int old_in;
-	int old_out;
-
+	ft_save_standard_exit ();
 	g_ms->n_cmd = 0;
 	i = 0;
-	old_in = dup(STDIN_FILENO);
-	old_out = dup(STDOUT_FILENO);
 	while (g_ms->count--)
 	{
 		ft_open_pipe (&g_ms->cmd_node[i]);
@@ -38,12 +51,10 @@ void	ft_process_cmds (void)
 			close (g_ms->cmd_node[i - 1].pipe[0]);
 		close (g_ms->cmd_node[i].pipe[1]);
 		if (g_ms->count == 1)
-			dup2 (old_out, STDOUT_FILENO);
+			dup2 (g_ms->std_out, STDOUT_FILENO);
 		g_ms->n_cmd++;
 		i++;
 	}
+	ft_return_standard_exit ();
 	free_all_struct (0);
-	dup2 (old_out, STDOUT_FILENO);
-	dup2 (old_in, STDIN_FILENO);
-	return ;
 }

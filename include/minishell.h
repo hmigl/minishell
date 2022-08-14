@@ -53,6 +53,8 @@ struct s_minishell {
 	int		n_pipe;
 	int		exit_code;
 	int		n_cmd;
+	int		std_in;
+	int		std_out;
 };
 
 //  SUPPORT
@@ -120,5 +122,6 @@ char	*ft_remove_quote_from_str(char *argv);
 void	ft_process_cmds(void);
 void	ft_check_exec(t_cmd *cmd);
 char	**get_envp(void);
+void	ft_return_standard_exit (void);
 
 #endif // MINISHELL_H

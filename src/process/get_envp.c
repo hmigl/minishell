@@ -33,8 +33,6 @@ char	**get_envp(void)
 	int		env_vars;
 	int		i;
 
-	if (g_ms->path == NULL)
-		return (NULL);
 	env_vars = get_env_vars_amount();
 	envp = ft_calloc(env_vars + 1, sizeof(char *));
 	if (envp == NULL)
