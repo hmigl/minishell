@@ -18,7 +18,7 @@
    fun:rl_insert
    fun:_rl_dispatch_subseq
    fun:readline_internal_char
-   fun:UnkownInlinedFun
+   fun:UnknownInlinedFun
    fun:readline
    ...
 }
