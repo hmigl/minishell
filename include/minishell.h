@@ -75,6 +75,7 @@ char	*get_next_line(int fd);
 void	*ft_free(void *pointer);
 int		is_not_spc_quote_dollar(char c);
 int		only_space(t_cmd *cmd);
+void	welcome(void);
 
 // REDIRECT
 void	exec_heredoc(char *delimiter);

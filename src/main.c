@@ -6,7 +6,7 @@ static void	repl(void)
 {
 	char	*input;
 
-	printf ("Bem vindo \n");
+	welcome();
 	while (1)
 	{
 		stdin_sig();
