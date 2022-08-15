@@ -4,8 +4,7 @@ OBJDIR := objdir
 LIBFTDIR := lib/libft
 LIBFT := $(LIBFTDIR)/libft.a
 
-# don't forget to add -Werror
-CFLAGS += $(INCLUDE) -Wall -Wextra -g3
+CFLAGS += $(INCLUDE) -Wall -Wextra -Werror -g3
 LDLIBS += -lreadline -lft
 LDFLAGS += -L$(LIBFTDIR)
 VALFLAGS = --suppressions=readline.supp --leak-check=full --show-leak-kinds=all
