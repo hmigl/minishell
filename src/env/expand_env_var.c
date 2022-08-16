@@ -1,51 +1,55 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   expand_env_var.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: phiolive <phiolive@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/16 17:21:36 by phiolive          #+#    #+#             */
+/*   Updated: 2022/08/16 17:43:36 by phiolive         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-static char	*ft_convert(char *content, char *key, char *cmd)
+static int	*ft_get_values_for_variable(void)
 {
-	int		i;
-	int		k;
-	int		c;
+	int	*i;
+
+	i = ft_calloc (sizeof(int), 3);
+	i[0] = -1;
+	i[1] = -1;
+	i[2] = -1;
+	return (i);
+}
+
+char	*ft_convert(char *content, char *key, char *cmd)
+{
+	int		*i;
 	char	*convert;
 	size_t	aux;
 
-	i = -1;
-	k = -1;
-	c = -1;
+	i = ft_get_values_for_variable();
 	aux = ft_strlen(cmd) + ft_strlen(content) - ft_strlen(key);
 	convert = ft_calloc(aux, sizeof(char));
-	while (cmd[++i])
+	while (cmd[++i[0]])
 	{
-		if (cmd[i] == '$')
+		if (cmd[i[0]] == '$')
 		{
-			while (content[++k])
-				convert[++c] = content[k];
-			i++;
-			while (cmd[i] && is_not_spc_quote_dollar(cmd[i]))
-				i++;
+			while (content[++i[1]])
+				convert[++i[2]] = content[i[1]];
+			i[0]++;
+			while (cmd[i[0]] && is_not_spc_quote_dollar(cmd[i[0]]))
+				i[0]++;
 			break ;
 		}
 		else
-			convert[++c] = cmd[i];
+			convert[++i[2]] = cmd[i[0]];
 	}
-	while (cmd[i])
-		convert[++c] = cmd[i++];
+	while (cmd[i[0]])
+		convert[++i[2]] = cmd[i[0]++];
 	free(cmd);
 	return (convert);
-}
-
-
-char *ft_expand_exit_error (char *cmd)
-{
-	char *key;
-	char *value;
-	char *rtn;
-
-	key = ft_strdup ("?");
-	value = ft_itoa (g_ms->exit_code);
-	rtn = ft_convert(value, key, cmd);
-	ft_free(key);
-	ft_free(value);
-	return (rtn);
 }
 
 static char	*ft_cannot_find(char *var, char *cmd)
@@ -86,7 +90,7 @@ char	*ft_find(char *var, char *cmd)
 	while (anchor)
 	{
 		bigger = i - 1;
-		if (ft_strlen(anchor->key) > i -1)
+		if (ft_strlen(anchor->key) > i - 1)
 			bigger = ft_strlen(anchor->key);
 		if (!(ft_strncmp(anchor->key, &var[1], bigger)))
 			return (ft_convert(anchor->value, anchor->key, cmd));

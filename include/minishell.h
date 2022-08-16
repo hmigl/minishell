@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: phiolive <phiolive@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/16 19:17:34 by phiolive          #+#    #+#             */
+/*   Updated: 2022/08/16 19:17:37 by phiolive         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
@@ -33,7 +45,7 @@ struct s_var {
 struct s_cmd {
 	char	**argv;
 	char	*cmd_path;
-	char	*not_parsed;
+	char	*n_prs;
 	int		redirect_error;
 	int		pipe[2];
 	int		fd_in;
@@ -44,11 +56,11 @@ struct s_cmd {
 struct s_minishell {
 	t_var	*env_var;
 	t_var	*local_var;
-	t_cmd	*cmd_node;
+	t_cmd	*cmds;
 	int		total_cmd;
 	int		redirect_error;
 	char	**path;
-	int		count;
+	int		c;
 	int		pipe[2];
 	int		n_pipe;
 	int		exit_code;
@@ -76,6 +88,7 @@ void	*ft_free(void *pointer);
 int		is_not_spc_quote_dollar(char c);
 int		only_space(t_cmd *cmd);
 void	welcome(void);
+char	*ft_get_file_name(char *prompt_line, char quote);
 
 // REDIRECT
 void	exec_heredoc(char *delimiter);
@@ -91,7 +104,8 @@ t_var	*add_vars_to_env(char *key, char *value, t_var *var_struct);
 void	rm_single_node(t_var *node);
 char	**ft_save_env_vars(t_cmd *cmd);
 int		ft_have_a_var_to_save(char *str);
-char	*ft_expand_exit_error (char *cmd);
+char	*ft_expand_exit_error(char *cmd);
+char	*ft_convert(char *content, char *key, char *cmd);
 
 // EXPANSION
 char	*ft_expand_env_var(char *cmd);
@@ -118,11 +132,19 @@ void	ft_parse(void);
 void	ft_remove_quotes_from_cmd_node(t_cmd *cmd);
 char	**ft_remove_var_atrib_and_equals(char **argv);
 char	*ft_remove_quote_from_str(char *argv);
+int		ft_quote_error_msg(char *prompt_line);
+int		ft_backslash_error_msg(char *prompt_line);
+int		ft_redirect_error_msg(char *prompt_line);
+int		ft_pipe_error_msg(char *prompt_line);
+int		ft_check_after_redirect(char *str, char redirect);
+int		ft_check_after_pipe(char *str);
 
 // PROCESS
 void	ft_process_cmds(void);
 void	ft_check_exec(t_cmd *cmd);
 char	**get_envp(void);
-void	ft_return_standard_exit (void);
+void	ft_return_standard_exit(void);
+int		ft_check_access(t_cmd *cmd);
+int		ft_check_permissions_and_directory(t_cmd *cmd);
 
-#endif // MINISHELL_H
+#endif

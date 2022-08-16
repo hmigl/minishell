@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   save_paths.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: phiolive <phiolive@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/16 19:12:16 by phiolive          #+#    #+#             */
+/*   Updated: 2022/08/16 19:15:16 by phiolive         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-static void ft_copy_paths (char *cwd_path)
+static	void	ft_copy_paths(char *cwd_path)
 {
-	int i;
-	char **step;
+	int		i;
+	char	**step;
 
 	i = 0;
 	while (g_ms->path[i])
@@ -17,21 +29,19 @@ static void ft_copy_paths (char *cwd_path)
 	g_ms->path = step;
 }
 
-static void ft_save_current_path(void)
+static	void	ft_save_current_path(void)
 {
-	char *cwd_path;
+	char	*cwd_path;
 
 	cwd_path = NULL;
 	cwd_path = getcwd(cwd_path, 0);
 	ft_copy_paths(cwd_path);
-
 }
 
-
-static void ft_add_slash (void)
+static	void	ft_add_slash(void)
 {
-	int i;
-	char *step;
+	int		i;
+	char	*step;
 
 	i = -1;
 	while (g_ms->path[++i])
@@ -42,9 +52,9 @@ static void ft_add_slash (void)
 	}
 }
 
-void ft_save_paths (void)
+void	ft_save_paths(void)
 {
-	t_var *anchor;
+	t_var	*anchor;
 
 	anchor = g_ms->env_var;
 	while (ft_strncmp (anchor->key, "PATH", -1))

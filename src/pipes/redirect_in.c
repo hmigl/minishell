@@ -6,7 +6,7 @@
 /*   By: phiolive <phiolive@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 18:41:39 by phiolive          #+#    #+#             */
-/*   Updated: 2022/08/16 18:41:40 by phiolive         ###   ########.fr       */
+/*   Updated: 2022/08/16 18:55:54 by phiolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	ft_open_in(char *prompt_line)
 			g_ms->redirect_error = 1;
 			return ;
 		}
-		g_ms->cmd_node[g_ms->count].fd_in = open (file_name, O_RDONLY);
+		g_ms->cmds[g_ms->c].fd_in = open (file_name, O_RDONLY);
 	}
 	else
 	{

@@ -1,12 +1,16 @@
-#include "minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   heredoc_signal.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: phiolive <phiolive@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/16 19:12:07 by phiolive          #+#    #+#             */
+/*   Updated: 2022/08/16 19:12:08 by phiolive         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-// static void	heredoc_intr_sig(int sig)
-// {
-// 	(void)sig;
-// 	g_ms->exit_code = 130;
-// 	ft_putstr_fd("\n", 1);
-// 	exit(130);
-// }
+#include "minishell.h"
 
 static void	heredoc_intr_sig(int sig)
 {

@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   remove_quotes.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: phiolive <phiolive@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/16 18:03:47 by phiolive          #+#    #+#             */
+/*   Updated: 2022/08/16 18:38:52 by phiolive         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-static char *ft_alloc_mem (char *rtn, char *argv)
+static	char	*ft_alloc_mem(char *rtn, char *argv)
 {
 	int		i;
 	char	trigger;
@@ -20,10 +32,10 @@ static char *ft_alloc_mem (char *rtn, char *argv)
 		i++;
 	}
 	rtn = ft_calloc (alloc, sizeof(char));
-	return  (rtn);
+	return (rtn);
 }
 
-static void ft_copy_argv (char *rtn, char *argv)
+static	void	ft_copy_argv(char *rtn, char *argv)
 {
 	int		i;
 	char	trigger;
@@ -45,7 +57,7 @@ static void ft_copy_argv (char *rtn, char *argv)
 	return ;
 }
 
-char *ft_remove_quote_from_str(char *argv)
+char	*ft_remove_quote_from_str(char *argv)
 {
 	char	*rtn;
 
@@ -56,9 +68,9 @@ char *ft_remove_quote_from_str(char *argv)
 	return (rtn);
 }
 
-void	ft_remove_quotes_from_cmd_node (t_cmd *cmd)
+void	ft_remove_quotes_from_cmd_node(t_cmd *cmd)
 {
-	int j;
+	int	j;
 
 	j = 0;
 	if (cmd->argv)

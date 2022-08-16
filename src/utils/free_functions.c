@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   free_functions.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: phiolive <phiolive@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/16 19:11:57 by phiolive          #+#    #+#             */
+/*   Updated: 2022/08/16 19:11:58 by phiolive         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 void	*ft_free(void *pointer)
@@ -46,13 +58,13 @@ static void	free_cmd_nodes(void)
 	i = 0;
 	while (g_ms->total_cmd > i)
 	{
-		ft_free_double_pointer(g_ms->cmd_node[i].argv);
-		ft_free(g_ms->cmd_node[i].cmd_path);
-		ft_free(g_ms->cmd_node[i].not_parsed);
+		ft_free_double_pointer(g_ms->cmds[i].argv);
+		ft_free(g_ms->cmds[i].cmd_path);
+		ft_free(g_ms->cmds[i].n_prs);
 		i++;
 	}
-	ft_free(g_ms->cmd_node);
-	g_ms->cmd_node = NULL;
+	ft_free(g_ms->cmds);
+	g_ms->cmds = NULL;
 	return ;
 }
 
