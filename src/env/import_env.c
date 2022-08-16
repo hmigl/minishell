@@ -1,10 +1,57 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   import_env.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: phiolive <phiolive@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/16 17:21:43 by phiolive          #+#    #+#             */
+/*   Updated: 2022/08/16 18:00:26 by phiolive         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
+
+char	*ft_expand_exit_error(char *cmd)
+{
+	char	*key;
+	char	*value;
+	char	*rtn;
+
+	key = ft_strdup ("?");
+	value = ft_itoa (g_ms->exit_code);
+	rtn = ft_convert(value, key, cmd);
+	ft_free(key);
+	ft_free(value);
+	return (rtn);
+}
 
 void	rm_single_node(t_var *node)
 {
 	free(node->key);
 	free(node->value);
 	free(node);
+}
+
+static t_var	*env_loop(char *key, char *value, t_var *var_str, t_var *new)
+{
+	t_var	*anchor;
+
+	anchor = var_str;
+	while (anchor->next)
+	{
+		if (!(ft_strcmp(anchor->key, key)))
+		{
+			free(anchor->value);
+			free(key);
+			anchor->value = value;
+			free(new);
+			return (var_str);
+		}
+		anchor = anchor->next;
+	}
+	anchor->next = new;
+	return (var_str);
 }
 
 t_var	*add_vars_to_env(char *key_s, char *value_s, t_var *var_struct)
@@ -23,21 +70,7 @@ t_var	*add_vars_to_env(char *key_s, char *value_s, t_var *var_struct)
 	if (anchor == NULL)
 		var_struct = new_node;
 	else
-	{
-		while (anchor->next)
-		{
-			if (!(ft_strcmp(anchor->key, key)))
-			{
-				free(anchor->value);
-				free(key);
-				anchor->value = value;
-				free(new_node);
-				return (var_struct);
-			}
-			anchor = anchor->next;
-		}
-		anchor->next = new_node;
-	}
+		return (env_loop(key, value, var_struct, new_node));
 	return (var_struct);
 }
 

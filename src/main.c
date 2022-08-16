@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: phiolive <phiolive@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/16 17:21:04 by phiolive          #+#    #+#             */
+/*   Updated: 2022/08/16 17:21:05 by phiolive         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 t_minishell	*g_ms;
@@ -30,7 +42,7 @@ static void	repl(void)
 
 static void	ms_prepare(char **env)
 {
-	g_ms = ft_calloc(1, sizeof(t_minishell)); // check return and exit if NULL
+	g_ms = ft_calloc(1, sizeof(t_minishell));
 	ft_import_env(env);
 	g_ms->exit_code = 0;
 }
@@ -46,8 +58,3 @@ int	main(int argc, char *argv[], char *envp[])
 	repl();
 	return (0);
 }
-
-
-
-// integrar heredoc
-// TESTES

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   heredoc.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: phiolive <phiolive@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/16 18:41:37 by phiolive          #+#    #+#             */
+/*   Updated: 2022/08/16 18:55:54 by phiolive         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 static int	delimiter_coincides(char *heredoc_line, char *delimiter, int fd)
@@ -97,7 +109,7 @@ void	exec_heredoc(char *str)
 		exit(EXIT_FAILURE);
 	heredoc_stdin_sig();
 	write_heredoc_lines(heredoc_line, delimiter_nl, fd);
-	g_ms->cmd_node[g_ms->count].fd_in = dup(fd[0]);
+	g_ms->cmds[g_ms->c].fd_in = dup(fd[0]);
 	close(fd[1]);
 	ft_free(delimiter_nl);
 	close(fd[0]);

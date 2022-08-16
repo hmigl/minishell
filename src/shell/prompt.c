@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmigl <hmigl@student.42sp.org.br>          +#+  +:+       +#+        */
+/*   By: phiolive <phiolive@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 10:26:29 by hmigl             #+#    #+#             */
-/*   Updated: 2022/08/15 10:58:11 by hmigl            ###   ########.fr       */
+/*   Updated: 2022/08/16 18:55:54 by phiolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	ft_alloc_cmd(char *str)
 		i++;
 	}
 	i = 0;
-	g_ms->cmd_node = ft_calloc(alloc_cmd, sizeof(t_cmd));
+	g_ms->cmds = ft_calloc(alloc_cmd, sizeof(t_cmd));
 	return ;
 }
 

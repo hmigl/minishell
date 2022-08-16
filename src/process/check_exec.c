@@ -1,53 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_exec.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: phiolive <phiolive@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/16 18:58:53 by phiolive          #+#    #+#             */
+/*   Updated: 2022/08/16 19:03:19 by phiolive         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-static int ft_absoluth_path_check(t_cmd *cmd)
-{
-	struct stat	type;
-
-	if (stat(cmd->argv[0], &type) != 0)
-		return (1);
-	if ((type.st_mode & S_IFMT) == S_IFDIR)
-		return (1);
-	if ((type.st_mode & S_IXUSR))
-	{
-		cmd->cmd_path = ft_strdup(cmd->argv[0]);
-		return (0);
-	}
-	return (1);
-}
-
-static int	ft_check_access(t_cmd *cmd)
-{
-	int	i;
-	struct stat	type;
-
-	i = -1;
-
-	ft_free_double_pointer(g_ms->path);
-	cmd->cmd_path = 0;
-	if (!ft_absoluth_path_check(cmd))
-		return (0);
-	ft_save_paths ();
-	if (!g_ms->path)
-		return (1);
-	while (g_ms->path[++i])
-	{
-		cmd->cmd_path = ft_strjoin(g_ms->path[i], cmd->argv[0]);
-		if (stat (cmd->cmd_path, &type))
-		{
-			free (cmd->cmd_path);
-			cmd->cmd_path = NULL;
-			continue;
-		}
-		if ((type.st_mode & S_IXUSR))
-			return (0);
-		free (cmd->cmd_path);
-		cmd->cmd_path = NULL;
-	}
-	return (1);
-}
-
-static void ft_exec_cmd(t_cmd *cmd)
+static	void	ft_exec_cmd(t_cmd *cmd)
 {
 	char	**envp;
 	int		exit_code;
@@ -60,7 +25,7 @@ static void ft_exec_cmd(t_cmd *cmd)
 	exit(exit_code);
 }
 
-static void ft_create_process(t_cmd *cmd)
+static	void	ft_create_process(t_cmd *cmd)
 {
 	int	pid;
 	int	wstatus;
@@ -74,45 +39,22 @@ static void ft_create_process(t_cmd *cmd)
 		ft_exec_cmd(cmd);
 	else
 		waitpid(pid, &wstatus, 0);
-	if (g_ms->cmd_node[g_ms->n_pipe - g_ms->count].fd_out)
-		close (g_ms->cmd_node[g_ms->n_pipe - g_ms->count].fd_out);
+	if (g_ms->cmds[g_ms->n_pipe - g_ms->c].fd_out)
+		close (g_ms->cmds[g_ms->n_pipe - g_ms->c].fd_out);
 	g_ms->exit_code = (wstatus >> 8);
 }
 
-static int ft_check_permissions_and_directory (t_cmd *cmd)
-{
-	struct stat	type;
-	char *msg;
-
-	if (stat(cmd->argv[0], &type) != 0)
-		return (1);
-	if ((type.st_mode & S_IFMT) == S_IFDIR)
-	{
-		msg = ft_strjoin( cmd->argv[0] ,": Is a directory");
-		printf ("minishell: %s \n", msg);
-		free (msg);
-		return (0);
-	}
-	if (!(type.st_mode & S_IXUSR))
-	{
-		msg = ft_strjoin( cmd->argv[0] ,": Permission denied");
-		printf ("minishell: %s \n", msg);
-		free (msg);
-		return (0);
-	}
-	return (1);
-}
-void ft_check_exec (t_cmd *cmd)
+void	ft_check_exec(t_cmd *cmd)
 {
 	if (cmd->argv[0] == 0)
 		return ;
 	if (!ft_check_access(cmd))
 		ft_create_process (cmd);
 	else if (!ft_check_permissions_and_directory (cmd))
-		return;
+		return ;
 	else
 	{
-		ms_display_error_execve(cmd->argv[0],": command not found", 0);
+		ms_display_error_execve(cmd->argv[0], ": command not found", 0);
 		g_ms->exit_code = 127;
 	}
 	return ;

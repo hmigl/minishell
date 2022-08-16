@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   redirect.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: phiolive <phiolive@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/16 18:41:44 by phiolive          #+#    #+#             */
+/*   Updated: 2022/08/16 18:50:35 by phiolive         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-static void ft_trim_redirect_cpy (char *str, char *rtn)
+static	void	ft_trim_redirect_cpy(char *str, char *rtn)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	j = 0;
 	i = 0;
@@ -26,11 +38,11 @@ static void ft_trim_redirect_cpy (char *str, char *rtn)
 	str = NULL;
 }
 
-char *ft_trim_redirect (char *str)
+char	*ft_trim_redirect(char *str)
 {
-	int i;
-	char *rtn;
-	int trim;
+	int		i;
+	char	*rtn;
+	int		trim;
 
 	trim = 0;
 	i = 0;
@@ -47,39 +59,15 @@ char *ft_trim_redirect (char *str)
 		while (str[i + trim] != ' ' && str[i + trim])
 			trim++;
 	}
-	int k = ft_strlen(str) - trim + 1;
-	int size = ft_strlen(str);
-	rtn = ft_calloc (k , size - size + 1);
-	// rtn = ft_calloc (ft_strlen(str) - trim + 1, sizeof(char));
+	rtn = ft_calloc (ft_strlen(str) - trim + 1, sizeof(char));
 	ft_trim_redirect_cpy (str, rtn);
 	return (rtn);
 }
 
-static char *ft_get_file_name (char *prompt_line, char quote)
+char	*ft_file_name(char *prompt_line, char redirect)
 {
-	char *file_name;
-	int i;
-
-	i = 0;
-	if (quote)
-	{
-		while (prompt_line[i] != quote)
-			i++;
-	}
-	else
-	{
-		while (prompt_line[i] != ' ' && prompt_line[i])
-			i++;
-	}
-	file_name = ft_calloc (i + 1, sizeof(char));
-	ft_strlcpy (file_name, prompt_line, i + 1);
-	return (file_name);
-}
-
-char *ft_file_name (char *prompt_line, char redirect)
-{
-	char *file_name;
-	int	i;
+	char	*file_name;
+	int		i;
 
 	i = 0;
 	while (prompt_line[i] == redirect)
@@ -93,32 +81,31 @@ char *ft_file_name (char *prompt_line, char redirect)
 	return (file_name);
 }
 
-static char* ft_check_redirect_type (char *str, char *prompt_line, char redirect)
+static	char	*ft_check_redirect_type(char *str, char *prompt, char redr)
 {
-	if (redirect == '>')
-		str = ft_out_redirect (str, prompt_line);
+	if (redr == '>')
+		str = ft_out_redirect(str, prompt);
 	else
-		str = ft_in_redirect (str, prompt_line);
-	return (str) ;
-
+		str = ft_in_redirect(str, prompt);
+	return (str);
 }
-//colocar checagem em ponto específico fora do redirect (checar quote, checar numero de redirect e checar backslash checar &)
-char *ft_redirect (char *prompt_line)
+
+char	*ft_redirect(char *str)
 {
-	int i;
+	int	i;
 
 	i = -1;
-	while (prompt_line[++i])
+	while (str[++i])
 	{
-		if (prompt_line[i] == '\'' || prompt_line[i] == '\"')
-			i += (ft_next_occurrence (&prompt_line[i], prompt_line[i]));
-		else if (prompt_line[i] == '>' || prompt_line[i] == '<')
+		if (str[i] == '\'' || str[i] == '\"')
+			i += (ft_next_occurrence(&str[i], str[i]));
+		else if (str[i] == '>' || str[i] == '<')
 		{
-			prompt_line = ft_check_redirect_type (prompt_line , &prompt_line[i], prompt_line[i]);
+			str = ft_check_redirect_type(str, &str[i], str[i]);
 			i = -1;
 			if (g_ms->redirect_error)
-				break;
+				break ;
 		}
 	}
-	return (prompt_line);
+	return (str);
 }
