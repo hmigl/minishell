@@ -30,6 +30,8 @@ static int	ft_check_access(t_cmd *cmd)
 	ft_save_paths ();
 	if (!g_ms->path)
 		return (1);
+	if (cmd->argv[0][0] == '.')
+		return (1);
 	while (g_ms->path[++i])
 	{
 		cmd->cmd_path = ft_strjoin(g_ms->path[i], cmd->argv[0]);
