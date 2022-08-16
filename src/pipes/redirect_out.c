@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   redirect_out.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: phiolive <phiolive@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/16 18:41:42 by phiolive          #+#    #+#             */
+/*   Updated: 2022/08/16 18:53:23 by phiolive         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 static void ft_open_out (char *prompt_line, int t)
@@ -26,10 +38,10 @@ static void ft_open_out (char *prompt_line, int t)
 }
 
 
-char	*ft_out_redirect (char *str, char *prompt_line)
+char	*ft_out_redirect(char *str, char *prompt_line)
 {
-	int i;
-	int t;
+	int	i;
+	int	t;
 
 	t = 0;
 	i = -1;
