@@ -6,7 +6,7 @@
 /*   By: phiolive <phiolive@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 19:17:34 by phiolive          #+#    #+#             */
-/*   Updated: 2022/08/16 19:17:37 by phiolive         ###   ########.fr       */
+/*   Updated: 2022/08/17 13:18:23 by hmigl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ int		is_not_spc_quote_dollar(char c);
 int		only_space(t_cmd *cmd);
 void	welcome(void);
 char	*ft_get_file_name(char *prompt_line, char quote);
+void	free_two_ptrs(void *ptr1, void *ptr2);
 
 // REDIRECT
 void	exec_heredoc(char *delimiter);

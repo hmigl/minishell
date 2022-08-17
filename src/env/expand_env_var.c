@@ -6,7 +6,7 @@
 /*   By: phiolive <phiolive@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:21:36 by phiolive          #+#    #+#             */
-/*   Updated: 2022/08/16 17:43:36 by phiolive         ###   ########.fr       */
+/*   Updated: 2022/08/17 13:18:46 by hmigl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	*ft_convert(char *content, char *key, char *cmd)
 	}
 	while (cmd[i[0]])
 		convert[++i[2]] = cmd[i[0]++];
-	free(cmd);
+	free_two_ptrs(cmd, i);
 	return (convert);
 }
 

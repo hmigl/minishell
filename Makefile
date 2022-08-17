@@ -24,7 +24,7 @@ OBJS = $(addprefix $(OBJDIR)/, $(SRC:.c=.o))
 
 SRC = main.c prompt.c str_helpers.c ms_display_error.c \
 	free_functions.c save_paths.c signal.c get_next_line.c \
-	welcome.c
+	welcome.c free_functions2.c
 
 SRC += import_env.c expand_env_var.c save_env_var.c
 
