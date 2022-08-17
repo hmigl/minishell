@@ -6,7 +6,7 @@
 /*   By: phiolive <phiolive@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 18:58:58 by phiolive          #+#    #+#             */
-/*   Updated: 2022/08/16 19:11:26 by phiolive         ###   ########.fr       */
+/*   Updated: 2022/08/17 11:42:31 by phiolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ void	ft_return_standard_exit(void)
 
 void	ft_open_pipe(t_cmd *cmd)
 {
-	if (!g_ms->n_pipe)
-		return ;
 	if (g_ms->c)
 		pipe (cmd->pipe);
 	if (cmd->fd_in)
