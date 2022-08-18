@@ -6,7 +6,7 @@
 /*   By: phiolive <phiolive@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 10:26:29 by hmigl             #+#    #+#             */
-/*   Updated: 2022/08/16 18:55:54 by phiolive         ###   ########.fr       */
+/*   Updated: 2022/08/17 21:34:50 by phiolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,14 +71,19 @@ static char	*getcurdir(void)
 	cwd_matriz = ft_split(cwd, '/');
 	ft_free(cwd);
 	i = 0;
-	while (cwd_matriz[i] != NULL)
+	if (cwd_matriz[i] == NULL)
+		cwd = ft_strdup("/");
+	else
 	{
-		if (cwd_matriz[i + 1] == NULL)
+		while (cwd_matriz[i] != NULL)
 		{
-			cwd = ft_strdup(cwd_matriz[i]);
-			break ;
+			if (cwd_matriz[i + 1] == NULL)
+			{
+				cwd = ft_strdup(cwd_matriz[i]);
+				break ;
+			}
+			i++;
 		}
-		i++;
 	}
 	ft_free_double_pointer(cwd_matriz);
 	return (cwd);
