@@ -6,7 +6,7 @@
 /*   By: hmigl <hmigl@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 08:51:08 by hmigl             #+#    #+#             */
-/*   Updated: 2022/08/12 08:51:46 by hmigl            ###   ########.fr       */
+/*   Updated: 2022/08/18 10:44:14 by hmigl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,14 @@ static void	cd_failed(char *dir)
 {
 	char	*buffer;
 
-	buffer = ft_strjoin(dir, ": No such file or directory");
 	if (dir == NULL)
 		ms_display_error("cd: ", "HOME not set", 0);
 	else
+	{
+		buffer = ft_strjoin(dir, ": No such file or directory");
 		ms_display_error("cd: ", buffer, 0);
-	free(buffer);
+		free(buffer);
+	}
 }
 
 static void	update_pwd(char *oldpwd)
