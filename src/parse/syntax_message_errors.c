@@ -6,7 +6,7 @@
 /*   By: phiolive <phiolive@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 18:10:35 by phiolive          #+#    #+#             */
-/*   Updated: 2022/08/16 18:40:09 by phiolive         ###   ########.fr       */
+/*   Updated: 2022/08/18 11:05:21 by hmigl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int	ft_redirect_error_msg(char *prompt_line)
 				g_ms->exit_code = 2;
 				return (1);
 			}
-			i += error;
+			i += error - 1;
 		}
 	}
 	return (0);
